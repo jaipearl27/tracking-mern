@@ -1,0 +1,53 @@
+@use "./variables.scss" as vars;
+
+.container {
+  max-width: 1440px;
+  width: 100%;
+}
+
+.container-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.tag {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: vars.$primary;
+  color: white;
+  font-size: 8px;
+  width: fit-content;
+}
+
+// common styles
+@mixin gradient-card {
+  background: linear-gradient(
+    180deg,
+    vars.$primary 12.42%,
+    rgba(255, 255, 255, 0.2) 89.14%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.section-heading-base {
+  font-size: 1.125rem; // Tailwind `text-lg`
+  font-weight: 500; // Tailwind `font-medium`
+  color: #1f2937; // Tailwind `text-gray-900`
+}
+
+.vertical-20 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

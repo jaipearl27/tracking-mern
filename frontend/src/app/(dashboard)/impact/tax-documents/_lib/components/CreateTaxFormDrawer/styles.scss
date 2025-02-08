@@ -1,0 +1,36 @@
+@use "@/styles/variables.scss" as vars;
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #f0f2f5;
+  cursor: pointer;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}

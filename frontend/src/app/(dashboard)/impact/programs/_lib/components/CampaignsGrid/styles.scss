@@ -1,0 +1,36 @@
+.campaign-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Three columns of equal width */
+    gap: 10px;
+    width: 75%;
+    margin-inline: auto;
+    .grid-item {
+        display: flex;
+        flex-direction: column;
+        font-size: smaller;
+        .logo {
+            width: 100px;
+            height: 200px;
+            border-radius: 10px;
+            // background-color: greenyellow;
+        }
+        .title {
+            font-weight: 600;
+            padding-top: 10px;
+        }
+        .advertizer {
+            color: grey;
+        }
+        .desc {
+            padding-top: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Number of lines */
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        background-color: #f0f0f0; /* Example background color for items */
+        padding: 10px; /* Example padding for items */
+    }
+}

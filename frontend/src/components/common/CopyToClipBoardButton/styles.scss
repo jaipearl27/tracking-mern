@@ -1,0 +1,13 @@
+@import "@/styles/index.scss";
+
+.copy-clipboard-btn{
+    display: flex;
+    align-items: center;
+    background-color: $primary;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    gap: 10px;
+    cursor: pointer;
+}

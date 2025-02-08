@@ -1,0 +1,36 @@
+.form-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .field-label {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  .field-helper-text {
+    color: hsl(220 8.9% 46.1%);
+    font-size: 12px;
+  }
+}
+
+// @use "@/styles/variables.scss" as vars;
+
+// .form-field {
+//   outline: none;
+//   width: 100%;
+//   border-radius: 8px;
+//   background-color: white;
+//   border: 1px solid hsl(220, 13%, 91%);
+//   padding: 8px 12px;
+//   font-size: 14px;
+// }
+
+// .form-field:focus {
+//   border: 1px solid vars.$primary;
+// }
+
+// .form-field::placeholder {
+//   color: lightgray;
+// }

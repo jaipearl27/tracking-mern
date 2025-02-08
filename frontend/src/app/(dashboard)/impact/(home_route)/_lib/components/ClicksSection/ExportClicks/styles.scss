@@ -1,0 +1,36 @@
+@import "@/styles/index.scss";
+
+.export-clicks {
+    background-color: white;
+    border: 0.5px solid rgba(80, 80, 80, 0.4);
+    border-radius: 20px;
+    padding: 10px 20px;
+    .top-sec {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            background-color: $primary;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+    .filters-sec {
+        margin: 15px 0;
+        font-size: smaller;
+        .filter {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 5px 0;
+            input {
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+        }
+    }
+}

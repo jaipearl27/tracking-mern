@@ -1,0 +1,36 @@
+@import "./mixins.scss";
+@import "./variables.scss";
+@import "./utilities.scss";
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.subheading {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  // width: 300px;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  width: 0;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

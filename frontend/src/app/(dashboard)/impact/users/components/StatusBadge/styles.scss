@@ -1,0 +1,24 @@
+.status-badge {
+    padding: 7px;
+    border-radius: 5px;
+    font-weight: 600;
+    color: white;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    position: absolute;
+    top: -10px;
+    right: 0px;
+
+    &.ACTIVE {
+        background-color: rgb(7, 197, 17);
+    }
+    &.INVITED {
+        background-color: rgb(60, 177, 255);
+    }
+    &.PENDING {
+        background-color: rgb(255, 204, 0);
+    }
+}

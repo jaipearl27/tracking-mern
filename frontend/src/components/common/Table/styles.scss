@@ -1,0 +1,29 @@
+@use "@/styles/variables.scss" as vars;
+
+.table-wrapper {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+
+  .table-header {
+    background-color: vars.$secondary;
+
+    .table-th {
+      padding: 10px;
+      font-size: 14px;
+      line-height: 16.94px;
+      color: #50505080;
+      font-weight: 400;
+    }
+  }
+}
+
+td {
+  padding: 10px;
+}

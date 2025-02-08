@@ -1,0 +1,27 @@
+@import "@/styles/index.scss";
+
+.header{
+    background: linear-gradient( #F5F5F5 80%, white 20%);
+    height: 400px;
+    .section-2{
+        width: clamp(350px, 100%, 1440px);
+        margin-top: 90px;
+        margin-inline: auto;
+        display: flex;
+        justify-content: space-between;
+
+        @include responsive(sm){   
+            margin-top: 40px; 
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 15px;
+            height: auto;
+            
+            
+        }
+    }
+    @include responsive(sm){
+        height: auto;
+    }
+
+}

@@ -1,0 +1,38 @@
+@import "@/styles/index.scss";
+
+.pagination-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 20px auto;
+    button {
+        border: none;
+        background-color: $primary;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        &:disabled {
+            opacity: 0.7;
+        }
+    }
+}
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    color: $primary;
+    svg {
+        animation: rotate 2s infinite linear;
+    }
+
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}

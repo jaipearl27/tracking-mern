@@ -1,0 +1,16 @@
+@import "@/styles/index.scss";
+
+.users-container {
+    .header-wrapper {
+        background-color: $primary;
+        .users-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            width: 85%;
+            margin: 0 auto;
+            padding: 10px 0px;
+        }
+    }
+}

@@ -1,0 +1,66 @@
+@import "@/styles/index.scss";
+
+.click-details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    margin: 30px auto;
+    row-gap: 30px;
+    column-gap: 5px;
+    @include responsive(lg){
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+    @include responsive(xs){
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 300px;
+        gap: 20px;
+        a{
+            color: $primary
+        }
+        @include responsive(xs){
+            height: max-content;
+            align-items: start;
+        }
+        .logo {
+            border: 1px solid grey;
+            border-radius: 20px;
+            @include responsive(xs){
+                margin: 0 auto;
+            }
+        }
+        h3{
+            color: $primary;
+        }
+        .details{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            .field{
+                font-size: smaller;
+                display: flex;
+                gap: 5px;
+                .key{
+                    font-weight: 600;
+                }
+                .value{
+                    &.ellipsis{
+                        width: 200px;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1; /* Number of lines */
+                        line-clamp:1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
+    }
+}

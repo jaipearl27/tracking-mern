@@ -1,0 +1,32 @@
+@import "@/styles/index.scss";
+
+.help-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .help-headings{
+        .heading-bold{
+            font-size: 45px;
+            font-weight: 600;
+            @include responsive(lg){
+                font-size: 30px;
+            }
+        }
+        .heading-slim{
+            font-size: 45px;
+            font-weight: 300;
+            @include responsive(lg){
+                font-size: 30px;
+            }
+        }
+    }
+    .ask-btn{
+        color: white;
+        height: 74px;
+        width: 74px;
+        border-radius: 100%;
+        padding: 10px 20px;
+        display: flex;justify-content: center;align-items: center;
+        background-color: $primary;
+    }
+}

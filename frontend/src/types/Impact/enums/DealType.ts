@@ -1,0 +1,7 @@
+export enum DealType {
+    GENERAL_SALE = "GENERAL_SALE",
+    FREE_SHIPPING = "FREE_SHIPPING",
+    GIFT_WITH_PURCHASE = "GIFT_WITH_PURCHASE",
+    REBATE = "REBATE",
+    BOGO = "BOGO",
+}

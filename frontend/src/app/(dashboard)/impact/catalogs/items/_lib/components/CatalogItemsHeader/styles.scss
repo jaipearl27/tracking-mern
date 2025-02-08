@@ -1,0 +1,14 @@
+@import "@/styles/index.scss";
+
+.catalog-items-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    .logo{
+        color: $primary;
+    }
+    h1 {
+        color: $primary;
+    }
+}

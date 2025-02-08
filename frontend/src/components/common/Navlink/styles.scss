@@ -1,0 +1,34 @@
+@use "@/styles/variables.scss" as vars;
+
+.nav-link-wrapper {
+  width: 100%;
+  padding: 15px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    text-wrap: nowrap;
+    flex: 1;
+  }
+}
+
+.navlink-active {
+  color: white;
+  background-color: vars.$primary;
+}
+
+.navlink-normal {
+  &:hover {
+    background-color: #f3f4f6;
+  }
+}

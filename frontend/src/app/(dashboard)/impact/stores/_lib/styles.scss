@@ -1,0 +1,15 @@
+@import "@/styles/index.scss";
+
+.stores-list-wrapper {
+  display: grid;
+  gap: 20px 10px;
+  grid-template-columns: repeat(3, 1fr);
+
+  @include responsive(xl) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include responsive(lg) {
+    grid-template-columns: 1fr;
+  }
+}

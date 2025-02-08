@@ -1,0 +1,36 @@
+@import "@/styles/index.scss";
+
+.login-wrapper {
+    display: flex;
+    .side-img {
+        height: 100vh;
+        position: relative;
+    }
+
+    @include responsive(max) {
+        .side-img {
+            width: 30vw;
+        }
+        .login-sec {
+            width: 70vw;
+        }
+    }
+
+    @include responsive(xl) {
+        .side-img {
+            width: 45vw;
+        }
+        .login-sec {
+            width: 55vw;
+        }
+    }
+    @include responsive(md) {
+        .side-img {
+            display: none;
+        }
+        .login-sec {
+            width: 100vw;
+            margin: 0 auto;
+        }
+    }
+}

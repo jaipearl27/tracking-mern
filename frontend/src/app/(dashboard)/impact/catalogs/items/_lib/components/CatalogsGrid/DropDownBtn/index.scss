@@ -1,0 +1,26 @@
+.drop-down-btn {
+    position: relative;
+    display: flex;
+    button {
+        width: 120px;
+        display: flex;
+        justify-content: center;
+    }
+    .drop-items {
+        position: absolute;
+        top: 35px;
+        background-color: white;
+        border: 1px solid grey;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .drop-item {
+            padding: 5px;
+            border-bottom: 1px solid grey;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: smaller;
+        }
+    }
+}

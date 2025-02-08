@@ -1,0 +1,43 @@
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 30;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .drawer-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    flex: 1;
+    min-height: 0px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000aa;
+  z-index: 20;
+}

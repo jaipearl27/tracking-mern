@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.heading {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+}

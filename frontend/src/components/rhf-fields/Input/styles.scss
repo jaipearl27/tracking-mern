@@ -1,0 +1,19 @@
+@use "@/styles/variables.scss" as vars;
+
+.form-field {
+  outline: none;
+  width: 100%;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid hsl(220, 13%, 91%);
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.form-field:focus {
+  border: 1px solid vars.$primary;
+}
+
+.form-field::placeholder {
+  color: lightgray;
+}
