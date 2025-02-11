@@ -5,7 +5,7 @@ const nextConfig = {
     IMPACT_ACCOUNT_SID: process.env.IMPACT_ACCOUNT_SID,
     IMPACT_AUTH_TOKEN: process.env.IMPACT_AUTH_TOKEN,
   },
-  async redirects() {
+  async redirects() { 
     return [
       {
         source: "/",
