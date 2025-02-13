@@ -21,7 +21,7 @@ export class Paths {
       GET_CAMPAIGN_LOGO: (campLogoUri: string) => campLogoUri,
       PUBLIC_TERMS_DOWNLOAD: (campaignId: string) =>
         `/Mediapartners/${process?.env?.IMPACT_ACCOUNT_SID}/Campaigns/${campaignId}/PublicTerms/Download`,
-    },
+    }, // Programs
     CLICKS: {
       GET_CLICK_PARTNERS: (acc_sid: string, id: string) =>
         `/Mediapartners/${acc_sid}/Clicks/${id}`,

@@ -1,0 +1,11 @@
+@import "@/styles/utilities.scss";
+
+.placeholder-sec {
+    grid-column: 1 / span 3;
+}
+.clicks-sec {
+    border: 0.5px solid rgba(80, 80, 80, 0.4);
+    @include gradient-card;
+    border-radius: 20px;
+    padding: 10px;
+}

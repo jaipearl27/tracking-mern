@@ -8,25 +8,33 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { LOGIN } from "@/utils/Providers/API_V1/API";
 
 const LoginForm = () => {
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const router= useRouter();
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const creds = await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            localStorage.setItem("token", (creds.user as any).accessToken);
-            toast.success("Login Successful.")
-            router.push("/impact")
+            // const creds = await signInWithEmailAndPassword(
+            //     auth,
+            //     email,
+            //     password
+            // );
+
+            const creds = await LOGIN({ email, password })
+
+            if (creds.status === 200) {
+                localStorage.setItem("token", (creds.user as any).accessToken);
+                toast.success("Login Successful.")
+                router.push("/impact")
+            } else {
+                toast.error("Invalid Credentials")
+            }
 
 
         } catch (error) {

@@ -1,0 +1,17 @@
+@import "@/styles/index.scss";
+
+.click-sec-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    .logo-wrapper {
+        border-radius: 100%;
+        background-color: white;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $primary;
+    }
+}

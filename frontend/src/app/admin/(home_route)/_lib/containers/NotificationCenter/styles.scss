@@ -1,0 +1,6 @@
+@import "@/styles/utilities.scss";
+
+.notification-center-wrapper {
+  @include gradient-card;
+  grid-area: notification;
+}

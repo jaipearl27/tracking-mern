@@ -1,0 +1,66 @@
+@use "@/styles/variables.scss" as vars;
+
+.text {
+  line-height: 12.1px;
+  font-size: 10px;
+}
+
+.wrapper {
+  background-color: white;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 0.5px solid vars.$border_color;
+  width: 100%;
+  border-radius: 10px;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+
+    .top-left {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .info {
+        display: flex;
+        gap: 20px;
+
+        p {
+          color: vars.$text_gray;
+        }
+      }
+
+      .heading {
+        display: flex;
+        gap: 5px;
+        align-items: flex-start;
+
+        span {
+          color: vars.$primary;
+        }
+      }
+    }
+
+    .top-right {
+      display: flex;
+      gap: 5px;
+      height: max-content;
+
+      .top-right-inner {
+        font-size: 7px;
+        line-height: 8.47px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .item-description {
+    font-size: 7px;
+    line-height: 8.47px;
+    color: vars.$text_gray;
+  }
+}

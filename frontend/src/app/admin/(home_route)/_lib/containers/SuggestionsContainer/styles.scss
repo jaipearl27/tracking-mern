@@ -1,0 +1,6 @@
+@import "@/styles/utilities.scss";
+
+.suggestion-wrapper {
+    grid-area: suggestion;
+    @include gradient-card;
+}
