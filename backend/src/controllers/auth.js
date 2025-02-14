@@ -1,11 +1,11 @@
 import User from "../../models/user/user.js";
-import { asyncHandler } from "../../utils/errors/asyncHandler.js";
-import ApiErrorResponse from "../../utils/errors/ApiErrorResponse.js";
+// import { asyncHandler } from "../../utils/errors/asyncHandler.js";
+// import ApiErrorResponse from "../../utils/errors/ApiErrorResponse.js";
 import { generateSignUpToken } from "../../utils/tokenHelper.js";
 import jwt from "jsonwebtoken";
-import { COOKIE_OPTIONS } from "../../../constants.js";
+// import { COOKIE_OPTIONS } from "../../../constants.js";
 import dotnev from "dotenv";
-import { sendSignupMail } from "../../utils/Mail/emailTemplates.js";
+// import { sendSignupMail } from "../../utils/Mail/emailTemplates.js";
 
 
 dotnev.config();
