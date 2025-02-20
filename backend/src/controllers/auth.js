@@ -1,22 +1,18 @@
-import User from "../../models/user/user.js";
-// import { asyncHandler } from "../../utils/errors/asyncHandler.js";
-// import ApiErrorResponse from "../../utils/errors/ApiErrorResponse.js";
-import { generateSignUpToken } from "../../utils/tokenHelper.js";
-import jwt from "jsonwebtoken";
-// import { COOKIE_OPTIONS } from "../../../constants.js";
-import dotnev from "dotenv";
-// import { sendSignupMail } from "../../utils/Mail/emailTemplates.js";
 
+
+import dotnev from "dotenv";
+import User from "../models/users.js";
+import { asyncHandler } from "../utils/errors/asyncHandler.js";
+import ApiErrorResponse from "../utils/errors/apiErrorResponse.js";
 
 dotnev.config();
 
-
 //SignUp controller
 export const signup = asyncHandler(async (req, res, next) => {
-  const { name, email, mobileNumber, password } = req?.body;
+  const { name, email, password } = req?.body;
 
 
-  if (!name || !email || !mobileNumber || !password) {
+  if (!name || !email || !password) {
     return next(new ApiErrorResponse("All fields are required", 400));
   }
 
@@ -25,55 +21,30 @@ export const signup = asyncHandler(async (req, res, next) => {
   if (existingUser)
     return next(new ApiErrorResponse("User already exists!", 400));
 
-
-  const signUptoken = generateSignUpToken({
+  const user = await User.create({
     name,
     email,
-    mobileNumber,
     password,
+  })
+
+
+
+  // const signUptoken = generateSignUpToken({
+  //   name,
+  //   email,
+  //   mobileNumber,
+  //   password,
+  // });
+
+
+  return res.status(200).json({
+    success: true,
+    message: "Signed up successfully.",
+    user
   });
 
-
-  sendSignupMail(email, signUptoken)
-    .then(() => {
-      return res.status(200).json({
-        success: true,
-        message: "Mail sent successfully.",
-      });
-    })
-    .catch((error) => {
-      res.status(400).json({
-        success: false,
-        message: `Unable to send mail! ${error.message}`,
-      });
-    });
 });
 
-
-export const verifySignUpToken = asyncHandler(async (req, res, next) => {
-  const { token } = req.params;
-  const decodedToken = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
-
-  if (!decodedToken) {
-    return next(
-      new ApiErrorResponse("Email is not verified or Invalid token", 400)
-    );
-  }
-
-
-  const savedUser = await User.create(decodedToken);
-  if (!savedUser) {
-    return next(new ApiErrorResponse("User is not created", 400));
-  }
-
-
-  // Redirect the user to the login page after successful verification
-  res.redirect(302, `${process.env.FRONTEND_LOGIN_PAGE_URL}`);
-});
-
-
-// Login controller
 export const login = asyncHandler(async (req, res, next) => {
   const { email, password } = req?.body;
   const existingUser = await User.findOne({ email });
@@ -89,25 +60,25 @@ export const login = asyncHandler(async (req, res, next) => {
     return next(new ApiErrorResponse("Wrong password", 400));
 
 
-  const access_token = existingUser.generateAccessToken();
-  const refresh_token = existingUser.generateRefreshToken();
+  const token = existingUser.generateToken();
 
 
-  existingUser.refreshToken = refresh_token;
+
+  existingUser.token = token;
   await existingUser.save({ validateBeforeSave: false });
 
 
   res
-    .cookie("access_token", access_token, {
-      ...COOKIE_OPTIONS,
-      expires: new Date(Date.now() + 30 * 60 * 1000), // 30 minutes
-    })
-    .cookie("refresh_token", refresh_token, {
-      ...COOKIE_OPTIONS,
-      expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 days
-    })
+    // .cookie("access_token", access_token, {
+    //   ...COOKIE_OPTIONS,
+    //   expires: new Date(Date.now() + 30 * 60 * 1000), // 30 minutes
+    // })
+    // .cookie("refresh_token", refresh_token, {
+    //   ...COOKIE_OPTIONS,
+    //   expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 days
+    // })
     .status(200)
-    .json({ success: true, message: "Logged in successfully." });
+    .json({ success: true, message: "Logged in successfully.", token });
 });
 
 
@@ -116,7 +87,7 @@ export const logout = asyncHandler(async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(
       req.user._id,
-      { $unset: { refreshToken: 1 } },
+      { $unset: { token: 1 } },
       { new: true }
     );
 

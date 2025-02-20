@@ -33,9 +33,9 @@ const userSchema = new mongoose.Schema(
       enum: AvailableUserRoles,
       default: UserRolesEnum.USER,
     },
-    // refreshToken: {
-    //   type: String,
-    // },
+    token: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
@@ -57,32 +57,15 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 };
 
 
-//Generate Access Token
-userSchema.methods.generateAccessToken = function () {
-  return jwt.sign(
-    {
-      _id: this._id,
-      email: this.email,
-      name: this.name,
-      role: this.role,
-    },
-    process.env.ACCESS_TOKEN_SECRET,
-    {
-      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
-    }
-  );
-};
-
-
 //Generate Refresh Token
-userSchema.methods.generateRefreshToken = function () {
+userSchema.methods.generateToken = function () {
   return jwt.sign(
     {
       _id: this._id,
     },
-    process.env.REFRESH_TOKEN_SECRET,
+    process.env.TOKEN_SECRET,
     {
-      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+      expiresIn: process.env.TOKEN_EXPIRY,
     }
   );
 };
