@@ -23,7 +23,6 @@ const DashboardLayout = ({ children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter();
 
-
   useEffect(() => {
     if (!window.localStorage.getItem("token")) {
       router.push("/login");
@@ -53,8 +52,10 @@ const DashboardLayout = ({ children }: Props) => {
     <>
       <div className="layout-wrapper">
         <aside
-          className={`sidebar-wrapper ${isCollapsed ? "sidebar-collapsed" : "sidebar-normal"
-            }  `}>
+          className={`sidebar-wrapper ${
+            isCollapsed ? "sidebar-collapsed" : "sidebar-normal"
+          }  `}
+        >
           <ImageWrapper
             alt="#"
             src="/vercel.svg"
@@ -92,7 +93,9 @@ const DashboardLayout = ({ children }: Props) => {
               )}
             </div>
           </header>
-          <main id="main-container" className="main">{children}</main>
+          <main id="main-container" className="main">
+            {children}
+          </main>
         </div>
       </div>
       <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>

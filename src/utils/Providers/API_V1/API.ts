@@ -16,7 +16,7 @@ import axios, { AxiosInstance } from "axios";
 //     }
 //     return null;
 //   }
-  
+
 //   function createAxiosInstance({
 //     accept,
 //     contentLength,
@@ -40,9 +40,34 @@ import axios, { AxiosInstance } from "axios";
 //     });
 //   }
 
+export const LOGIN = async (data: {
+  email: string;
+  password: string;
+}): Promise<any> => {
+  const result = axios.post(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`,
+    data
+  );
+  return result;
+};
+export const SIGN_UP = async (data: {
+  name: string;
+  email: string;
+  password: string;
+}): Promise<any> => {
+  const result = axios.post(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`,
+    data
+  );
+  return result;
+};
 
-
-export const LOGIN = async (data: {email: string, password: string}): Promise<any> => {
-        const result = axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, data)
-        return result
+export const FORGOT_PASSWORD = async (data: {
+  email: string;
+}): Promise<any> => {
+  const result = axios.post(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/forgot-password`,
+    data
+  );
+  return result;
 };
