@@ -26,31 +26,36 @@ const AuthWrapper = ({ children }: Props) => {
   //   }
   // }, []);
 
-  // Function to determine redirection based on authentication
-  const checkRedirection = () => {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
-    console.log("CHECKING REDIRECTION:", { user, pathname });
-    if (user === undefined) return null; // Prevent redirect until user state is updated
+  
+// Function to determine redirection based on authentication
+const checkRedirection = () => {
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+  console.log("User Role:", user?.role, "Pathname:", pathname);
 
-    if (publicRoutes.has(pathname)) {
-      console.log("Public route, no redirection needed");
-      return null;
+  if (user === undefined) return null; // Prevent redirect until user state is updated
+
+  if (!user && !authRoutes.has(pathname)) {
+    return { to: "/login" };
+  }
+
+  if (user && user?.role !== "ADMIN" && authRoutes.has(pathname)) {
+    return { to: authRoutes.has(pathname) ? pathname : "/impact" };
+  }
+
+  if (user && user?.role === "ADMIN") {
+    // ✅ Allow all `/admin/*` routes, prevent redirecting back to `/admin` unnecessarily
+    if (!pathname.startsWith("/admin")) {
+      console.log("ADMIN REDIRECTING TO:", pathname);
+      return { to: "/admin" };
     }
+  }
 
-    if (user && authRoutes.has(pathname)) {
-      return { to: "/impact" };
-    }
-
-    if (!user && !authRoutes.has(pathname)) {
-      return { to: "/login" };
-    }
-
-    return null;
-  };
+  return null;
+};
 
   const handlePush = async (path: string) => {
     if (pathname !== path) {
-      await router.push(path);
+      router.push(path);
     }
     setLoading(false);
   };

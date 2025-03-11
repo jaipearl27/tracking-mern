@@ -99,3 +99,29 @@ export const navLinksData = [
     to: "/impact/withdrawal-settings",
   },
 ];
+
+
+
+export const adminNavLinksData = [
+  {
+    text: "Home",
+    icon: <MdOutlineDashboardCustomize size={20} />,
+    to: "/admin",
+  },
+  {
+    text: "Users",
+    icon: <FaUsers size={20} />,
+    to: "/admin/users",
+  },
+
+  {
+    text: "Impact",
+    icon: <FaBullhorn size={20} />,
+    subLinks: [
+      { text: "Profile", to: "/admin/impact/profile" },
+      { text: "Programs", to: "/admin/impact/programs" },
+
+    ],
+  },
+  
+];

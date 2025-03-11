@@ -31,7 +31,7 @@ const AddUser = () => {
                     setFormData({
                         name: response.data.user.name || "",
                         email: response.data.user.email || "",
-                        password:response.data.user.password||"",
+                        password:"",
                         role: response.data.user.role || "USER",
                     });
                 }
@@ -109,7 +109,7 @@ const AddUser = () => {
                     </div>
                     {/* password */}
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">{userId ? "New Password" : "Password"}</label>
                         <input type="password"
                         id="password"
                         name="password" value={formData.password} onChange={handleChange} placeholder="password" required />

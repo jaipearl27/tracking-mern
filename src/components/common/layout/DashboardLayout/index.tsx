@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ImageWrapper from "../../ImageWrapper";
-import { navLinksData } from "./_data";
+import { adminNavLinksData, navLinksData } from "./_data";
 import Navlink from "../../Navlink";
 import Container from "../../Container";
 import "./styles.scss";
@@ -23,12 +23,14 @@ const DashboardLayout = ({ children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter();
 
+  const [isAdmin, setIsAdmin] = useState(false)
 
-  // useEffect(() => {
-  //   if (!window.localStorage.getItem("token")) {
-  //     router.push("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const user = JSON.parse(window.localStorage.getItem("user") || "null");
+    if (user && user?.role === "ADMIN") {
+      setIsAdmin(true)
+    }
+  }, []);
 
   console.log(isDesktop);
 
@@ -63,7 +65,16 @@ const DashboardLayout = ({ children }: Props) => {
             width={35}
           />
           <nav className="navlinks-wrapper hide-scroll">
-            {navLinksData?.map((item, i) => (
+
+            {!isAdmin && navLinksData?.map((item, i) => (
+              <Navlink
+                isCollapsed={isDesktop && isCollapsed}
+                {...item}
+                key={i}
+              />
+            ))}
+
+            {isAdmin && adminNavLinksData?.map((item, i) => (
               <Navlink
                 isCollapsed={isDesktop && isCollapsed}
                 {...item}

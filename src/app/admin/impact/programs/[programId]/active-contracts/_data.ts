@@ -1,0 +1,37 @@
+export const activeContractData = {
+  Id: "121124",
+  Name: "Public Terms",
+  CampaignId: "14913",
+  CampaignName: "Cake",
+  PayoutTermsList: [
+    {
+      TrackerName: "Online Sale",
+      TrackerType: "SALE",
+      PayoutPercentage: "20",
+      PayoutAmount: "",
+      PayoutCurrency: "",
+      ReferralPeriod: "30",
+      ReferralPeriodUnit: "DAY",
+      PayoutAmountLowerLimit: "",
+      PayoutAmountUpperLimit: "",
+      PayoutPercentageLowerLimit: "20",
+      PayoutPercentageUpperLimit: "20",
+    },
+    {
+      TrackerName: "Cake Meds Conversion",
+      TrackerType: "SALE",
+      PayoutPercentage: "20",
+      PayoutAmount: "",
+      PayoutCurrency: "",
+      ReferralPeriod: "30",
+      ReferralPeriodUnit: "DAY",
+      PayoutAmountLowerLimit: "",
+      PayoutAmountUpperLimit: "",
+      PayoutPercentageLowerLimit: "20",
+      PayoutPercentageUpperLimit: "20",
+    },
+  ],
+  PdfUri:
+    "/Mediapartners/IRHNMc2jhm2F3293666Q4hLBJG8y2mYpy1/Campaigns/14913/Contracts/121124/Download",
+  Uri: "/Mediapartners/IRHNMc2jhm2F3293666Q4hLBJG8y2mYpy1/Campaigns/14913/Contracts/Active",
+};

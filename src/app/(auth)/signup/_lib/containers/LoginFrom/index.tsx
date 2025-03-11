@@ -4,12 +4,12 @@ import "./styles.scss";
 import Loader from "../../components/Loader";
 import Link from "next/link";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    updateProfile,
-} from "firebase/auth";
-import { auth } from "@/config/firebase";
+// import {
+//     createUserWithEmailAndPassword,
+//     signInWithEmailAndPassword,
+//     updateProfile,
+// } from "firebase/auth";
+// import { auth } from "@/config/firebase";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Signup } from "@/utils/Providers/API_V1/API";

@@ -2,13 +2,14 @@
 
 .nav-link-wrapper {
   width: 100%;
-  padding: 15px 10px;
+  padding: 12px 10px;
   border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 10px;
   transition: all 0.3s ease;
   overflow: hidden;
+  cursor: pointer;
 
   i {
     display: flex;
@@ -22,13 +23,48 @@
   }
 }
 
+// Active state for main nav link
 .navlink-active {
   color: white;
   background-color: vars.$primary;
 }
 
+// Default hover effect
 .navlink-normal {
   &:hover {
     background-color: #f3f4f6;
   }
+}
+
+/* ─── Nested Submenu Styling ─────────────────── */
+.nav-sublinks {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px; // Indentation for sub-links
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.nav-sublinks.open {
+  max-height: 200px; // Adjust as needed
+}
+
+/* Style for each sub-link */
+.nav-sublink {
+  margin-top: 5px;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #e5e7eb;
+  }
+}
+
+/* Active sub-link */
+.nav-sublink-active {
+  background-color: #1660ff;
+  color: white;
 }
