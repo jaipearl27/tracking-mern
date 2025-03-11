@@ -1,8 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useAuth } from "./hook1";
-import { auth } from "@/config/firebase";
-import { onAuthStateChanged, User } from "firebase/auth";
 import { usePathname, useRouter } from "next/navigation";
 import Loader from "../Loader";
 
@@ -12,10 +9,7 @@ type Props = {
 
 const AuthWrapper = ({ children }: Props) => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>(() => {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  // const [user, setUser] = useState<any>(undefined); // Initially undefined to prevent premature redirects
 
   const loggedRoutes = new Set<string>([]);
   const publicRoutes = new Set<string>(["/link-redirector"]);
@@ -24,56 +18,54 @@ const AuthWrapper = ({ children }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const checkRedirection = (user: any | null) => {
-    if (publicRoutes?.has(pathname)) {
-      console.log("HERE", "CHECK");
-      return;
+  // Load user from localStorage only on the client side
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const storedUser = localStorage.getItem("user");
+  //     setUser(storedUser ? JSON.parse(storedUser) : null);
+  //   }
+  // }, []);
+
+  // Function to determine redirection based on authentication
+  const checkRedirection = () => {
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    console.log("CHECKING REDIRECTION:", { user, pathname });
+    if (user === undefined) return null; // Prevent redirect until user state is updated
+
+    if (publicRoutes.has(pathname)) {
+      console.log("Public route, no redirection needed");
+      return null;
     }
 
-    if (user && authRoutes?.has(pathname)) {
-      return {
-        to: "/impact",
-      };
+    if (user && authRoutes.has(pathname)) {
+      return { to: "/impact" };
     }
 
-    if (!user && !authRoutes?.has(pathname)) {
-      return {
-        to: "/login",
-      };
+    if (!user && !authRoutes.has(pathname)) {
+      return { to: "/login" };
     }
+
+    return null;
   };
 
   const handlePush = async (path: string) => {
-    await router?.push(path);
-    setTimeout(() => setLoading(false), 150);
+    if (pathname !== path) {
+      await router.push(path);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
-    // onAuthStateChanged(auth, async (user) => {
-    //   // if (user) {
-
-    //   // } else {
-    //   //   console.log(user, "CHECK", "USER__NOT___LOGEGED___IN");
-    //   //   if (publicRoutes?.has(pathname)) {
-    //   //     setLoading(false);
-    //   //     // return;
-    //   //   }
-    //   //   if (!authRoutes?.has(pathname)) {
-    //   //     await handlePush?.("/login");
-    //   //   }
-    //   // }
-    // });
-    console.log("CHECK", "USER_IS_LOGGED_IN", user);
-    const res = checkRedirection(user);
-    (async () => {
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    if (user !== undefined) {
+      const res = checkRedirection();
       if (res?.to) {
-        await handlePush(res?.to);
-        return;
+        handlePush(res.to);
+      } else {
+        setLoading(false);
       }
-    })();
-
-    setLoading(false);
-  }, []);
+    }
+  }, [pathname]);
 
   return loading ? (
     <div

@@ -27,8 +27,9 @@ const LoginForm = () => {
             // );
 
             const creds = await LOGIN({ email, password })
-console.log(creds,"creds")
+            console.log(creds,"creds")
             if (creds.status === 200) {
+                localStorage.setItem("user", JSON.stringify(creds.data));
                 localStorage.setItem("token", creds.data.token);
               
                 toast.success("Login Successful.")
