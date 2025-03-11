@@ -27,15 +27,24 @@ const LoginForm = () => {
             // );
 
             const creds = await LOGIN({ email, password })
-
+console.log(creds,"creds")
             if (creds.status === 200) {
-                localStorage.setItem("token", (creds.user as any).accessToken);
+                localStorage.setItem("token", creds.data.token);
+              
                 toast.success("Login Successful.")
-                router.push("/impact")
-            } else {
-                toast.error("Invalid Credentials")
+                
+                console.log("Role Data:", creds.data.role);
+
+
+         if(creds.data.role==="ADMIN"){
+            router.push("/admin")
+
+         }
+             else if(creds.data.role==="USER") {
+              router.push("/impact")
             }
 
+        }
 
         } catch (error) {
             console.log(error);

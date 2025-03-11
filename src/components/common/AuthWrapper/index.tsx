@@ -12,6 +12,10 @@ type Props = {
 
 const AuthWrapper = ({ children }: Props) => {
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   const loggedRoutes = new Set<string>([]);
   const publicRoutes = new Set<string>(["/link-redirector"]);
@@ -20,7 +24,7 @@ const AuthWrapper = ({ children }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const checkRedirection = (user: User | null) => {
+  const checkRedirection = (user: any | null) => {
     if (publicRoutes?.has(pathname)) {
       console.log("HERE", "CHECK");
       return;
@@ -45,29 +49,30 @@ const AuthWrapper = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      // if (user) {
-      console.log("CHECK", "USER_IS_LOGGED_IN", user);
+    // onAuthStateChanged(auth, async (user) => {
+    //   // if (user) {
 
-      const res = checkRedirection(user);
-
+    //   // } else {
+    //   //   console.log(user, "CHECK", "USER__NOT___LOGEGED___IN");
+    //   //   if (publicRoutes?.has(pathname)) {
+    //   //     setLoading(false);
+    //   //     // return;
+    //   //   }
+    //   //   if (!authRoutes?.has(pathname)) {
+    //   //     await handlePush?.("/login");
+    //   //   }
+    //   // }
+    // });
+    console.log("CHECK", "USER_IS_LOGGED_IN", user);
+    const res = checkRedirection(user);
+    (async () => {
       if (res?.to) {
         await handlePush(res?.to);
         return;
       }
-      setLoading(false);
-      // } else {
-      //   console.log(user, "CHECK", "USER__NOT___LOGEGED___IN");
-      //   if (publicRoutes?.has(pathname)) {
-      //     setLoading(false);
-      //     // return;
-      //   }
+    })();
 
-      //   if (!authRoutes?.has(pathname)) {
-      //     await handlePush?.("/login");
-      //   }
-      // }
-    });
+    setLoading(false);
   }, []);
 
   return loading ? (

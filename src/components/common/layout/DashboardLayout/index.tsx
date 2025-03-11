@@ -24,11 +24,11 @@ const DashboardLayout = ({ children }: Props) => {
   const router = useRouter();
 
 
-  useEffect(() => {
-    if (!window.localStorage.getItem("token")) {
-      router.push("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!window.localStorage.getItem("token")) {
+  //     router.push("/login");
+  //   }
+  // }, []);
 
   console.log(isDesktop);
 

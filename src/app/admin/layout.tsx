@@ -1,11 +1,12 @@
 import DashboardLayout from "@/components/common/layout/DashboardLayout";
-// import MaxWidth from "@/components/common/MaxWidth";
 import React from "react";
 
 type Props = { children: React.ReactNode };
 
-const layout = (props: Props) => {
+const Layout = (props: Props) => {
+    console.log("props",props); 
+
     return <DashboardLayout>{props?.children}</DashboardLayout>;
 };
 
-export default layout;
+export default Layout;

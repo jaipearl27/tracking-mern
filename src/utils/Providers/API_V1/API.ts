@@ -43,6 +43,23 @@ import axios, { AxiosInstance } from "axios";
 
 
 export const LOGIN = async (data: {email: string, password: string}): Promise<any> => {
-        const result = axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, data)
+        const result = axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`, data)
         return result
+};
+export const Signup=async(data:{name:string,email:string,password:string}):Promise<any>=>{
+        const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`,data);
+        return result
+}
+
+export const getallUser=async():Promise<any>=>{
+        try{
+
+                const response=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`)
+                return response.data
+        }
+        catch(error){
+                console.error("Error fetching users:",error);
+                throw error
+
+        }
 };

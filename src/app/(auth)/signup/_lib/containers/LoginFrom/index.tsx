@@ -12,6 +12,7 @@ import {
 import { auth } from "@/config/firebase";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { Signup } from "@/utils/Providers/API_V1/API";
 
 const SignupForm = () => {
     const [loading, setLoading] = useState(false);
@@ -23,23 +24,50 @@ const SignupForm = () => {
     const [cpassword, setCPassword] = useState("");
     const router= useRouter();
 
+
+    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     try {
+    //         // const creds = await createUserWithEmailAndPassword(
+    //         //     auth,
+    //         //     email,
+    //         //     password
+    //         // );
+
+
+
+    //         const creds = await Signup({userName,email,password})
+    //         localStorage.setItem("token", (creds.userName as any).accessToken);
+    //         toast.success("Signup Successful.")
+    //         router.push("/impact")
+
+    //     } catch (error) {
+    //         console.log(error);
+    //         toast.error("Internal Server Error")
+    //     }
+    // };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+    
+        if (password !== cpassword) {
+            toast.error("Passwords do not match!");
+            return;
+        }
+    
+        setLoading(true);
         try {
-            const creds = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            localStorage.setItem("token", (creds.user as any).accessToken);
-            toast.success("Signup Successful.")
-            router.push("/impact")
-
+            const creds = await Signup({ name:userName, email, password });
+            toast.success("Signup Successful.");
+            router.push("/login");
         } catch (error) {
-            console.log(error);
-            toast.error("Internal Server Error")
+            console.error(error);
+            toast.error("Internal Server Error");
+        } finally {
+            setLoading(false);
         }
     };
+    
     return (
         <section className="signup-sec">
             <form onSubmit={handleSubmit}>
