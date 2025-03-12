@@ -33,8 +33,8 @@ export class Paths {
         `/Mediapartners/${acc_sid}/ClickExport`,
       EXPORT_CLICK_BRANDS: (acc_sid: string, id: number) =>
         `/Advertisers/${acc_sid}/Programs/${id}/ClickExport`,
-      POST_CREATE_TRACKING_LINK: (acc_sid: string, programId: string) =>
-        `/Mediapartners/${acc_sid}/Programs/${programId}/TrackingLinks?MediaPartnerPropertyId=1892978&DeepLink=https%3A%2F%2Fexample.com%2Fmysite%2F&Type=vanity&subId1=test&sharedId=test2`,
+      POST_CREATE_TRACKING_LINK: (acc_sid: string, programId: string, mediaPropertyId: string) =>
+        `/Mediapartners/${acc_sid}/Programs/${programId}/TrackingLinks`, //?MediaPartnerPropertyId=${mediaPropertyId}&DeepLink=https%3A%2F%2Fexample.com%2Fmysite%2F&Type=vanity&subId1=test&sharedId=test2
     },
     CATALOG: {
       GET_LIST_CATALOGS: (acc_sid: string) =>

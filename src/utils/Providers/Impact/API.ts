@@ -83,8 +83,8 @@ async function handleRequest<T>(
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       console.trace(error.response.data);
-      console.log(error.response?.data);
-      return null;
+      console.log('error', error.response?.data);
+      return error?.response?.data || null;
     }
     return null;
   }
@@ -248,11 +248,13 @@ export const IMPACT_ACTION_EXPORT_CLICK_BRANDS = async (
 };
 export const IMPACT_ACTION_CREATE_CLICK_POST = async (
   id: string,
+  mediaPropertyId: string,
   params?: ParamsT,
 ): Promise<any[] | null> => {
+  console.log('mediaPropertyId', mediaPropertyId)
   const axiosInstance = createAxiosInstance({ accept: "application/json" });
   return handleRequest(
-    axiosInstance.get(CLICKS.POST_CREATE_TRACKING_LINK(acc_sid, id), {
+    axiosInstance.post(CLICKS.POST_CREATE_TRACKING_LINK(acc_sid, id, mediaPropertyId), {
       params,
     }),
   );

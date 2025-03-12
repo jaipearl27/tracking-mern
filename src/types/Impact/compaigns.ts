@@ -15,6 +15,7 @@ export type Compaign = {
   AllowsDeeplinking: string;
   DeeplinkDomains: string[];
   Uri: string;
+  mediaProperties: any;
 };
 
 export type CompaignListing = {

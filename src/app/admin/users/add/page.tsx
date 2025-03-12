@@ -13,7 +13,6 @@ const AddUser = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        role: "USER",
         password:"",
     });
 
@@ -31,8 +30,7 @@ const AddUser = () => {
                     setFormData({
                         name: response.data.user.name || "",
                         email: response.data.user.email || "",
-                        password:"",
-                        role: response.data.user.role || "USER",
+                        password:""
                     });
                 }
             } catch (error) {
@@ -116,13 +114,13 @@ const AddUser = () => {
                     </div>
 
                     {/* Role Field */}
-                    <div className="form-group">
-                        <label htmlFor="role">User Role</label>
+                    {/* <div className="form-group">
+                        <label htmlFor="role">Role</label>
                         <select id="role" name="role" value={formData.role} onChange={handleChange}>
                             <option value="USER">User</option>
                             <option value="ADMIN">Admin</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     {/* Submit Button */}
                     <button type="submit" className="submit-button">

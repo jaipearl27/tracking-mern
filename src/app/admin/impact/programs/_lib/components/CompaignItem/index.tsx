@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TCampaigns } from "../../types";
 import ImageWrapper from "@/components/common/ImageWrapper";
 import Link from "next/link";
 import Divider from "@/components/common/Divider";
 import { Compaign } from "@/types/Impact/compaigns";
 import useSWR from "swr";
-import { IMPACT_ACTION_CAMPAIGN_GET_LOGO } from "@/utils/Providers/Impact/API";
+import { IMPACT_ACTION_CAMPAIGN_GET_LOGO, IMPACT_ACTION_LIST_MEDIA_PROPERTIES } from "@/utils/Providers/Impact/API";
 import Modal from "@/components/common/Modal";
 import { useToggleBoolean } from "@/hooks/useToggleBoolean";
 import "./styles.scss";
@@ -15,6 +15,8 @@ import Anchor from "@/components/common/Anchor";
 import DeepLinks from "./modals/DeepLinks";
 import ShippingRegions from "./modals/ShippingRegions";
 import { useRouter } from "next/navigation";
+import TrackingLinkModal from "./modals/TrackingLink";
+import toast from "react-hot-toast";
 
 type Props = Compaign & {};
 
@@ -46,8 +48,9 @@ const CompaignItem = ({
   ShippingRegions: shipRegions,
   TrackingLink,
   Uri,
+  mediaProperties
 }: Props) => {
-  const router = useRouter();
+  // const router = useRouter();
 
   // const fetcher = async () => {
   //   const res = await IMPACT_ACTION_CAMPAIGN_GET_LOGO({
@@ -67,14 +70,17 @@ const CompaignItem = ({
   //   fetcher,
   // );
 
-  const handleCLick = () => {
-    router?.push(`/programs/${CampaignId}`);
-  };
+  // const handleCLick = () => {
+  //   router?.push(`/programs/${CampaignId}`);
+  // };
+
+
+
 
   return (
     <div
       key={CampaignId}
-      onClick={handleCLick}
+      // onClick={handleCLick}
       className="compaign-item-wrapper">
       {/* IMAGE AND INFO */}
       <div className="header">
@@ -111,6 +117,7 @@ const CompaignItem = ({
       <div className="row">
         <ShippingRegions data={shipRegions} />
         <DeepLinks data={DeeplinkDomains} />
+        <TrackingLinkModal data={[TrackingLink]} programId={CampaignId} mediaProperties={mediaProperties} />
       </div>
     </div>
   );

@@ -10,9 +10,11 @@ import CompaignListingFilter from "./Filter";
 import CampaignPagination from "./Pagination";
 import "./styles.scss";
 // import { fetchCampaigns } from "@/app/(dashboard)/programs/page";
-import { IMPACT_ACTION_CAMPAIGNS_GET } from "@/utils/Providers/Impact/API";
+import { IMPACT_ACTION_CAMPAIGNS_GET, IMPACT_ACTION_LIST_MEDIA_PROPERTIES } from "@/utils/Providers/Impact/API";
 import MaxWidth from "@/components/common/MaxWidth";
 import Loader from "@/components/common/Loader";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 type Props = {};
 
@@ -36,7 +38,7 @@ const CompaignContainer = (props: Props) => {
       PageSize: "6",
     });
 
-    console.log(res);
+    console.log('programs data', res);
     return res;
   });
 
@@ -49,6 +51,35 @@ const CompaignContainer = (props: Props) => {
   // }
 
   // console.log(JSON.stringify(data), "DATA", isLoading, "IS__LOADING");
+
+
+
+
+  const [mediaProperties, setMediaProperties] = useState<any>(null)
+
+  const { data: mediaPropertiesData, isLoading: mediaPropertiesLoading } = useSWR(
+    "/get media properties",
+    async () => await IMPACT_ACTION_LIST_MEDIA_PROPERTIES(),
+    {
+      onSuccess(mediaPropertiesData) {
+        // console.log("Media Properties Data:", mediaPropertiesData); // Debugging
+        if (!mediaPropertiesData) {
+          toast.error("No Media Properties Found");
+        } else {
+          setMediaProperties(mediaPropertiesData);
+        }
+      }
+    }
+  );
+  
+
+
+
+  // useEffect(() => {
+  //   console.log('mediaProperties', mediaProperties)
+  // }, [mediaProperties])
+
+
 
   return (
     <MaxWidth width={2000}>
@@ -63,7 +94,7 @@ const CompaignContainer = (props: Props) => {
       ) : (
         <>
           {/* <h6>datatttt</h6> */}
-          <CompaignListing data={(data?.Campaigns! || []) as any} />
+          <CompaignListing data={(data?.Campaigns! || []) as any}  mediaProperties={mediaProperties} />
           <CampaignPagination />
         </>
       )}

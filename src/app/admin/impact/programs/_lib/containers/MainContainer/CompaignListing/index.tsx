@@ -3,12 +3,17 @@ import { CompaignListing as TCompaignListing } from "@/types/Impact/compaigns";
 import CompaignItem from "../../../components/CompaignItem";
 
 // Data
-import { compaignData } from "../../../data";
+// import { compaignData } from "../../../data";
 
 // Styles
 import "./styles.scss";
 
-const CompaignListing = ({ data }: { data: TCompaignListing["Campaigns"] }) => {
+const CompaignListing = ({ data, mediaProperties }: { data: TCompaignListing["Campaigns"], mediaProperties: any }) => {
+
+
+
+
+
   return (
     <div className="campaign-list-wrapper">
       {(data || [])?.map((item) => {
@@ -31,6 +36,7 @@ const CompaignListing = ({ data }: { data: TCompaignListing["Campaigns"] }) => {
             TrackingLink={item.TrackingLink}
             Uri={item.Uri}
             key={item.CampaignId}
+            mediaProperties={mediaProperties}
           />
         );
       })}
