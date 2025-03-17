@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
 import "../users/styles.scss";
+import { getallUser } from "@/utils/Providers/API_V1/API";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -10,8 +11,9 @@ const Users = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`);
-                setUsers(response.data.users);
+                const response = await getallUser();
+                console.log(response, "response")
+                setUsers(response.users);
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
@@ -42,7 +44,7 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user, index) => (
+                        {users && users.map((user: any, index: number) => (
                             <tr key={user._id} className={index % 2 === 0 ? "even" : "odd"}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>

@@ -16,6 +16,7 @@ export type Compaign = {
   DeeplinkDomains: string[];
   Uri: string;
   mediaProperties: any;
+  users: any;
 };
 
 export type CompaignListing = {

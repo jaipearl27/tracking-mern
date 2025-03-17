@@ -15,6 +15,7 @@ import MaxWidth from "@/components/common/MaxWidth";
 import Loader from "@/components/common/Loader";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { getallUser } from "@/utils/Providers/API_V1/API";
 
 type Props = {};
 
@@ -22,6 +23,9 @@ const CompaignContainer = (props: Props) => {
   const searchParams = useSearchParams();
   const targetedParam = searchParams?.get("InsertionOrderStatus");
   const Page = searchParams?.get("Page");
+
+  const [users, setUsers] = useState<any>(null)
+
 
   const key = "/programs" + Page + targetedParam;
 
@@ -71,7 +75,21 @@ const CompaignContainer = (props: Props) => {
       }
     }
   );
-  
+
+  const { data: usersData, isLoading: usersLoading } = useSWR(
+    "/get users",
+    async () => await getallUser(),
+    {
+      onSuccess(usersData) {
+        if (!usersData) {
+          toast.error("No Users Found");
+        } else {
+          setUsers(usersData.users);
+        }
+      }
+    }
+  );
+
 
 
 
@@ -94,7 +112,7 @@ const CompaignContainer = (props: Props) => {
       ) : (
         <>
           {/* <h6>datatttt</h6> */}
-          <CompaignListing data={(data?.Campaigns! || []) as any}  mediaProperties={mediaProperties} />
+          <CompaignListing data={(data?.Campaigns! || []) as any} mediaProperties={mediaProperties} users={users} />
           <CampaignPagination />
         </>
       )}

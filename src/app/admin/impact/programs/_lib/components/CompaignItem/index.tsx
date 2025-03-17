@@ -48,7 +48,8 @@ const CompaignItem = ({
   ShippingRegions: shipRegions,
   TrackingLink,
   Uri,
-  mediaProperties
+  mediaProperties,
+  users
 }: Props) => {
   // const router = useRouter();
 
@@ -117,7 +118,7 @@ const CompaignItem = ({
       <div className="row">
         <ShippingRegions data={shipRegions} />
         <DeepLinks data={DeeplinkDomains} />
-        <TrackingLinkModal data={[TrackingLink]} programId={CampaignId} mediaProperties={mediaProperties} />
+        <TrackingLinkModal data={[TrackingLink]} programId={CampaignId} mediaProperties={mediaProperties} users={users} />
       </div>
     </div>
   );

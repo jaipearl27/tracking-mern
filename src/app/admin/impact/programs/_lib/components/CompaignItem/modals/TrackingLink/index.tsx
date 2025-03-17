@@ -13,14 +13,17 @@ type Props = {
   data: string[];
   programId: any;
   mediaProperties: any;
+  users: any;
 };
 
 
-const TrackingLinkModal = ({ data, programId, mediaProperties }: Props) => {
+const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) => {
 
 
   const [response, setResponse] = useState<any>(null)
   const [selectedMediaProperty, setSelectedMediaProperty] = useState<any>(null)
+  const [selectedUser, setSelectedUser] = useState<any>(null)
+
   // console.log('programId', programId)
 
   const [trackingLinkData, setTrackingLinkData] = useState<any>(null)
@@ -84,6 +87,9 @@ const TrackingLinkModal = ({ data, programId, mediaProperties }: Props) => {
           </li> */}
 
 
+
+
+
           {!trackingLinkData && data?.map((i, c) => (
             <li key={c} className="no-decoration">
               {i && i?.length > 0 ? <Link href={i} target="_blank">{i}</Link> : (
@@ -107,6 +113,31 @@ const TrackingLinkModal = ({ data, programId, mediaProperties }: Props) => {
               </div>
             </li>
           )}
+
+
+
+          <li className="no-decoration" style={{marginTop: "5px"}}>
+            Assign to:
+          </li>
+
+          <li className="no-decoration">
+            <select
+              onChange={(e) => {
+                const selectedId = e.target.value;
+                console.log("Selected User ID:", selectedId);
+                setSelectedUser(selectedId);
+              }}
+            >
+              <option value="" disabled selected>
+                Select a User
+              </option>
+              {users?.map((i: any, index: number) => (
+                <option key={index} value={i?._id}>
+                  {i?.email}
+                </option>
+              ))}
+            </select>
+          </li>
 
           {/* 
           {response && (
