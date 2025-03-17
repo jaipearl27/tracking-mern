@@ -53,7 +53,6 @@ export const Signup=async(data:{name:string,email:string,password:string}):Promi
 
 export const getallUser=async():Promise<any>=>{
         try{
-
                 const response=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`)
                 return response.data
         }
@@ -63,3 +62,24 @@ export const getallUser=async():Promise<any>=>{
 
         }
 };
+
+
+export const getTrackingLinks=async():Promise<any>=>{
+        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`)
+        return result
+}
+
+export const getTrackingLinkByProgramId=async(ProgramId:string):Promise<any>=>{
+        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks/program/${ProgramId}`)
+        return result
+}
+
+export const getTrackingLinkById=async(id:string):Promise<any>=>{
+        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks/${id}`)
+        return result
+}
+
+export const createTrackingLink=async(data:{TrackingLink:string,ProgramId:string}):Promise<any>=>{
+        const result=await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`,data)
+        return result
+}
