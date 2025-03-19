@@ -83,8 +83,15 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
 
   const assignTrackingLink = async () => {
+    if(!selectedUser) return alert("Please select a user")
     const result: any = await createAssignment({ trackingLinkId: trackingLinkData[0]?._id, userId: selectedUser })
-    console.log(result, "result")
+
+    alert(result?.response?.data?.message)
+
+
+    await fetchAssignmentsAsPerTrackingLink()
+    setShowAssignTo(false)
+    setSelectedUser(null)
   }
 
   return (
@@ -132,7 +139,15 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
           {trackingLinkData && trackingLinkData?.length > 0 ? trackingLinkData?.map((item: any, idx: number) => (
             <li key={idx} className="no-decoration">
-              {item?.TrackingLink?.length > 0 && <Link href={item?.TrackingLink} target="_blank">{item?.TrackingLink}</Link>}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px" }}>
+                {item?.TrackingLink?.length > 0 && <Link href={item?.TrackingLink} target="_blank">{item?.TrackingLink}</Link>}
+                <button onClick={() => {
+                  setShowAssignTo(true)
+                }
+                } className="btn-primary">
+                  Create Assignment
+                </button>
+              </div>
             </li>
           )) : (
             <li className="no-decoration">
@@ -156,17 +171,19 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                   <tr>
                     <th>Tracking Link</th>
                     <th>Assigned To</th>
+                    <th>Clicks</th>
                   </tr>
                 </thead>
-                <tbody> 
-                {assignments?.map((item: any) => (
-                  <tr>
-                    <td><Link href={item?.trackingLinkId?.TrackingLink} target="_blank">{item?.trackingLinkId?.TrackingLink}</Link></td>
-                    <td>{item?.userId?.email}</td>
-                  </tr>
-                ))}
+                <tbody>
+                  {assignments?.map((item: any) => (
+                    <tr >
+                      <td style={{ paddingTop: "5px" }}><Link href={item?.trackingLinkId?.TrackingLink} target="_blank">{item?.trackingLinkId?.TrackingLink}</Link></td>
+                      <td style={{ paddingTop: "5px" }}>{item?.userId?.email}</td>
+                      <td style={{ paddingTop: "5px", textAlign: "center" }}>{item?.totalClicks}</td>
+                    </tr>
+                  ))}
                 </tbody>
-                </table>
+              </table>
             </>
           )}
 
@@ -178,13 +195,14 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                 Assign to:
               </li>
 
-              <li className="no-decoration">
+              <li className="no-decoration" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <select
                   onChange={(e) => {
                     const selectedId = e.target.value;
-                    console.log("Selected User ID:", selectedId);
+                    // console.log("Selected User ID:", selectedId);
                     setSelectedUser(selectedId);
                   }}
+                  
                 >
                   <option value="" disabled selected>
                     Select a User
@@ -195,11 +213,11 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                     </option>
                   ))}
                 </select>
+
+                <button className="btn-primary" onClick={() => assignTrackingLink()}>Assign</button>
               </li>
 
-              <li className="no-decoration">
-                <button onClick={() => assignTrackingLink()}>Assign</button>
-              </li>
+        
             </>
           )}
 

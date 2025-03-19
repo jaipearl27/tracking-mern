@@ -53,11 +53,15 @@ const Users = () => {
                                         {user.role}
                                     </span>
                                 </td>
-                                <td>
+                                <td style={{ display: "flex", gap: 10 }}>
+                                    <Link href={`/admin/users/${user._id}`}>
+                                        <button className="btn-primary">View</button>
+                                    </Link>
                                     <Link href={`/admin/users/add?id=${user._id}`}>
-                                        <button className="edit-btn">Edit</button>
+                                        <button className="btn-primary">Edit</button>
                                     </Link>
                                 </td>
+                                
                             </tr>
                         ))}
                     </tbody>

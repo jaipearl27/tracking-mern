@@ -34,3 +34,20 @@ input::-webkit-inner-spin-button {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+
+.btn-primary {
+  background-color: #ff5e00;
+  color: #fff;
+  padding: 4px 20px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor:pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #ff5e00;
+}
+

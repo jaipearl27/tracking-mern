@@ -42,12 +42,23 @@ import axios, { AxiosInstance } from "axios";
 
 
 export const LOGIN = async (data: {email: string, password: string}): Promise<any> => {
-        const result = axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`, data)
-        return result
+        try {
+                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`, data)
+                return result
+        } catch (error) {
+                console.error("Error during login:", error);
+                return error;
+        }
 };
+
 export const Signup=async(data:{name:string,email:string,password:string}):Promise<any>=>{
-        const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`,data);
-        return result
+        try {
+                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`,data);
+                return result
+        } catch (error) {
+                console.error("Error during signup:", error);
+                return error;
+        }
 }
 
 export const getallUser=async():Promise<any>=>{
@@ -62,45 +73,84 @@ export const getallUser=async():Promise<any>=>{
 };
 
 export const getTrackingLinks=async():Promise<any>=>{
-        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`)
-        return result
+        try {
+                const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`)
+                return result
+        } catch (error) {
+                console.error("Error fetching tracking links:", error);
+                return error;
+        }
 }
 
 export const getTrackingLinkByProgramId=async(ProgramId:string):Promise<any>=>{
-        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks/program/${ProgramId}`)
-        return result
+        try {
+                const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks/program/${ProgramId}`)
+                return result
+        } catch (error) {
+                console.error("Error fetching tracking link by program ID:", error);
+                return error;
+        }
 }
 
 export const getTrackingLinkById=async(id:string):Promise<any>=>{
-        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks/${id}`)
-        return result
+        try {
+                const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks/${id}`)
+                return result
+        } catch (error) {
+                console.error("Error fetching tracking link by ID:", error);
+                return error;
+        }
 }
 
 export const createTrackingLink=async(data:{TrackingLink:string,ProgramId:string}):Promise<any>=>{
-        const result=await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`,data)
-        return result
+        try {
+                const result=await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`,data)
+                return result
+        } catch (error) {
+                console.error("Error creating tracking link:", error);
+                return error;
+        }
 }
 
 export const createAssignment=async(data: {trackingLinkId: string, userId: string}):Promise<any>=>{
-        const result=await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`,data)
-        return result
+        try {
+                const result= await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`,data)
+                return result
+        } catch (error) {
+                console.error("Error creating assignment:", error);
+                return error;
+        }
 }
 
 export const getAssignments=async():Promise<any>=>{
-        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`)
-        return result
+        try {
+                const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`)
+                return result
+        } catch (error) {
+                console.error("Error fetching assignments:", error);
+                return error;
+        }
 }
 
 export const getAssignmentsByTrackingLinkID = async (trackingLinkId: string): Promise<any> => {
-        const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/trackingLink/${trackingLinkId}`)
-        return result
+        try {
+                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/trackingLink/${trackingLinkId}`)
+                return result
+        } catch (error) {
+                console.error("Error fetching assignments by tracking link ID:", error);
+                return error;
+        }
 }
 
 export const getAssignmentById=async(id:string):Promise<any>=>{
-        const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/${id}`)
-        return result
+        try {
+                const result=await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/${id}`)
+                return result
+        } catch (error) {
+                console.error("Error fetching assignment by ID:", error);
+                return error;
+        }
 }
-
 
 
 

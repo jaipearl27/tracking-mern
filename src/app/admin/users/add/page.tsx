@@ -110,7 +110,7 @@ const AddUser = () => {
                         <label htmlFor="password">{userId ? "New Password" : "Password"}</label>
                         <input type="password"
                         id="password"
-                        name="password" value={formData.password} onChange={handleChange} placeholder="password" required />
+                        name="password" value={formData.password} onChange={handleChange} placeholder="password" required={!userId} />
                     </div>
 
                     {/* Role Field */}
