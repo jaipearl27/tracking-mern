@@ -17,8 +17,8 @@ type Props = {
 const Modal = ({
   onClose,
   open,
-  height = 300,
-  width = 500,
+  height = 500,
+  width = 700,
   children,
   title,
 }: Props) => {
