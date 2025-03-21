@@ -10,9 +10,10 @@ import { GoSidebarCollapse } from "react-icons/go";
 import useCheckScreenSize from "@/hooks/useCheckScreenSize";
 import Drawer from "../../Drawer";
 import LargeButton from "../../LargeButton";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { auth } from "@/config/firebase";
 import { signOut } from "firebase/auth";
+import { LOGOUT } from "@/utils/Providers/API_V1/API";
 
 type Props = {
   children: React.ReactNode;
@@ -52,6 +53,12 @@ const DashboardLayout = ({ children }: Props) => {
     }
   }, [isDesktop, isDrawerOpen]);
 
+  const logout = async () => {
+    await LOGOUT()
+    router?.push("/login");
+  }
+
+
   return (
     <>
       <div className="layout-wrapper">
@@ -83,6 +90,7 @@ const DashboardLayout = ({ children }: Props) => {
               />
             ))}
           </nav>
+          <button className="btn-primary" onClick={() => logout()}>Logout</button>
         </aside>
         <div className="content-wrapper">
           <header className="header">
@@ -97,8 +105,7 @@ const DashboardLayout = ({ children }: Props) => {
                   buttonText="Sign Out"
                   variant="PRIMARY"
                   onClick={async () => {
-                    await signOut(auth);
-                    router?.push("/login");
+                    await logout();
                   }}
                 />
               )}
@@ -109,15 +116,30 @@ const DashboardLayout = ({ children }: Props) => {
       </div>
       <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         <nav className="navlinks-wrapper hide-scroll">
-          {navLinksData?.map((item, i) => (
+
+
+          {!isAdmin && navLinksData?.map((item, i) => (
             <Navlink
-              isCollapsed={isCollapsed}
+              isCollapsed={isDesktop && isCollapsed}
               afterPushOperation={() => setIsDrawerOpen(false)}
               {...item}
               key={i}
             />
           ))}
+
+          {isAdmin && adminNavLinksData?.map((item, i) => (
+            <Navlink
+              isCollapsed={isDesktop && isCollapsed}
+              afterPushOperation={() => setIsDrawerOpen(false)}
+              {...item}
+              key={i}
+            />
+          ))}
+
+
         </nav>
+        <button className="btn-primary" onClick={() => logout()}>Logout</button>
+
       </Drawer>
     </>
   );

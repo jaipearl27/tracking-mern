@@ -1,0 +1,64 @@
+@import "@/styles/index.scss";
+
+.catalog-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 75%;
+    margin-inline: auto;
+    .catalog {
+        cursor: pointer;
+        .item {
+            display: flex;
+            flex-direction: column;
+            font-size: smaller;
+            .logo {
+                width: 100px;
+                height: 200px;
+                border-radius: 10px;
+                // background-color: greenyellow;
+            }
+            .title {
+                font-weight: 600;
+                padding-top: 10px;
+            }
+            .campaign-name {
+                color: grey;
+            }
+            .advertizer-name {
+                color: grey;
+                font-size: smaller;
+            }
+            background-color: #f0f0f0; /* Example background color for items */
+            padding: 10px; /* Example padding for items */
+        }
+        &:hover .additional-info {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .additional-info {
+            display: none;
+            padding: 10px;
+            font-size: smaller;
+            border: 0.5px solid rgb(193, 193, 193);
+            .heading{
+                font-weight: 600;
+            }
+            button{
+                background-color: $primary;
+                border:  none;
+                padding: 5px;
+                border-radius: 5px;
+                margin-top: 10px;
+                width: 150px;
+                a{
+                    color: white;
+                    
+                    text-decoration: none;
+                }
+            }
+            .info{
+            }
+        }
+    }
+}

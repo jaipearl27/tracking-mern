@@ -10,6 +10,7 @@ type Props = {
   onClose: () => Promise<void> | void;
   width?: number | string;
   height?: number | string;
+  maxWidth?: number | string;
   children: React.ReactNode;
   title: string;
 };
@@ -18,7 +19,8 @@ const Modal = ({
   onClose,
   open,
   height = 500,
-  width = 700,
+  width = "70vw",
+  maxWidth = "100vw",
   children,
   title,
 }: Props) => {
@@ -46,7 +48,7 @@ const Modal = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="modal"
-              style={{ width, height }}>
+              style={{ width, height, maxWidth }}>
               <div className="modal-header">
                 <h6 style={{ fontSize: 18 }}>{title}</h6>
                 <IoClose

@@ -145,7 +145,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                   setShowAssignTo(true)
                 }
                 } className="btn-primary">
-                  Create Assignment
+                  {assignments && assignments?.length > 0 ? "Reassign" : "Create Assignment"}
                 </button>
               </div>
             </li>
@@ -214,7 +214,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                   ))}
                 </select>
 
-                <button className="btn-primary" onClick={() => assignTrackingLink()}>Assign</button>
+                <button className="btn-primary" onClick={() => assignTrackingLink()}>{assignments && assignments?.length > 0 ? "Reassign" : "Assign"}</button>
               </li>
 
         

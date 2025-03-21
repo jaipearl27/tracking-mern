@@ -26,78 +26,83 @@ export const navLinksData = [
   {
     text: "Account",
     icon: <FaUserCircle size={20} />,
-    to: "/impact/account",
+    to: "/account",
   },
   {
-    text: "Ads",
-    icon: <FaBullhorn size={20} />,
-    to: "/impact/ads",
+    text: "Assignments",
+    icon: <FaUserCircle size={20} />,
+    to: "/impact/assignments",
   },
-  {
-    text: "Catalogs",
-    icon: <MdLibraryBooks size={20} />,
-    to: "/impact/catalogs",
-  },
-  //   {
-  //     text: "Click Details",
-  //     icon: <MdOutlineDashboardCustomize size={20} />,
-  //     to: "/click-details",
-  //   },
-  {
-    text: "Contracts",
-    icon: <FaFileContract size={20} />,
-    to: "/impact/contract",
-  },
-  {
-    text: "Invoices",
-    icon: <FaFileInvoice size={20} />,
-    to: "/impact/invoices",
-  },
-  {
-    text: "Jobs",
-    icon: <MdWork size={20} />,
-    to: "/impact/jobs",
-  },
-  {
-    text: "Media Properties",
-    icon: <MdPhotoLibrary size={20} />,
-    to: "/impact/media-properties",
-  },
-  {
-    text: "Campaigns",
-    icon: <FaBullhorn size={20} />,
-    to: "/impact/programs",
-  },
-  {
-    text: "Promotions",
-    icon: <FaGift size={20} />,
-    to: "/impact/promotions",
-  },
-  {
-    text: "Reports",
-    icon: <MdReport size={20} />,
-    to: "/impact/report",
-  },
-  {
-    text: "Stores",
-    icon: <FaStore size={20} />,
-    to: "/impact/stores",
-  },
-  {
-    text: "Tax Documents",
-    icon: <FaFileInvoiceDollar size={20} />,
-    to: "/impact/tax-documents",
-  },
-  {
-    text: "Users",
-    icon: <FaUsers size={20} />,
-    to: "/impact/users",
-  },
-  {
-    text: "Withdrawal Settings",
-    icon: <FaCogs size={20} />,
-    to: "/impact/withdrawal-settings",
-  },
+  // {
+  //   text: "Ads",
+  //   icon: <FaBullhorn size={20} />,
+  //   to: "/impact/ads",
+  // },
+  // {
+  //   text: "Catalogs",
+  //   icon: <MdLibraryBooks size={20} />,
+  //   to: "/impact/catalogs",
+  // },
+  // //   {
+  // //     text: "Click Details",
+  // //     icon: <MdOutlineDashboardCustomize size={20} />,
+  // //     to: "/click-details",
+  // //   },
+  // {
+  //   text: "Contracts",
+  //   icon: <FaFileContract size={20} />,
+  //   to: "/impact/contract",
+  // },
+  // {
+  //   text: "Invoices",
+  //   icon: <FaFileInvoice size={20} />,
+  //   to: "/impact/invoices",
+  // },
+  // {
+  //   text: "Jobs",
+  //   icon: <MdWork size={20} />,
+  //   to: "/impact/jobs",
+  // },
+  // {
+  //   text: "Media Properties",
+  //   icon: <MdPhotoLibrary size={20} />,
+  //   to: "/impact/media-properties",
+  // },
+  // {
+  //   text: "Campaigns",
+  //   icon: <FaBullhorn size={20} />,
+  //   to: "/impact/programs",
+  // },
+  // {
+  //   text: "Promotions",
+  //   icon: <FaGift size={20} />,
+  //   to: "/impact/promotions",
+  // },
+  // {
+  //   text: "Reports",
+  //   icon: <MdReport size={20} />,
+  //   to: "/impact/report",
+  // },
+  // {
+  //   text: "Stores",
+  //   icon: <FaStore size={20} />,
+  //   to: "/impact/stores",
+  // },
+  // {
+  //   text: "Tax Documents",
+  //   icon: <FaFileInvoiceDollar size={20} />,
+  //   to: "/impact/tax-documents",
+  // },
+  // {
+  //   text: "Users",
+  //   icon: <FaUsers size={20} />,
+  //   to: "/impact/users",
+  // },
+  // {
+  //   text: "Withdrawal Settings",
+  //   icon: <FaCogs size={20} />,
+  //   to: "/impact/withdrawal-settings",
+  // },
 ];
 
 
@@ -120,8 +125,18 @@ export const adminNavLinksData = [
     subLinks: [
       { text: "Profile", to: "/admin/impact/profile" },
       { text: "Programs", to: "/admin/impact/programs" },
-
-    ],
+      { text: "Ads", to: "/admin/impact/ads" },
+      { text: "Catalogs", to: "/admin/impact/catalogs" },
+      { text: "Contract", to: "/admin/impact/contract" },
+      { text: "Invoices", to: "/admin/impact/invoices" },
+      { text: "Jobs", to: "/admin/impact/jobs" },
+      { text: "Media Properties", to: "/admin/impact/media-properties" },
+      { text: "Promotions", to: "/admin/impact/promotions" },
+      { text: "Reports", to: "/admin/impact/report" },
+      { text: "Stores", to: "/admin/impact/stores" },
+      { text: "Tax Documents", to: "/admin/impact/tax-documents" },
+      { text: "Withdrawal Settings", to: "/admin/impact/withdrawal-settings" }
+    ]
   },
   
 ];

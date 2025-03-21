@@ -1,0 +1,15 @@
+@import "@/styles/index.scss";
+
+.pagination-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button{
+        background-color: $primary;
+        border: none;
+        padding: 10px;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}

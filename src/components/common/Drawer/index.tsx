@@ -31,14 +31,16 @@ const Drawer = ({ isOpen, onClose, title, children }: Props) => {
         {isOpen && (
           <div>
             {/* OVERLAY */}
-            <div onClick={onClose} className="overlay" />
+            <div onClick={onClose} className="overlay"  />
             {/* CONTENT */}
             <motion.div
               initial={{ x: 400 }}
               animate={{ x: 0 }}
               exit={{ x: 400 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="drawer">
+              className="drawer"
+              style={{overflowY: 'scroll', maxHeight: "100vh", maxWidth: '100vw'}}
+              >
               <div className="drawer-header">
                 <h5 className="title">{title}</h5>
                 <IoClose className="icon" size={24} onClick={onClose} />

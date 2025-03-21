@@ -1,0 +1,54 @@
+@import "@/styles/index.scss";
+
+.empty{
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    color: grey;
+}
+.promotion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 85%;
+    margin: 20px auto;
+    gap: 15px;
+    @include responsive(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include responsive(sm) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-item {
+        border: 1px solid grey;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: $secondary;
+        .additional-data {
+            font-size: smaller;
+            color: gray;
+        }
+        .redemption-code {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+    }
+}
+.pagination-btns{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 20px auto;
+    button{
+        border: none;
+        background-color: $primary;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        &:disabled{
+            opacity: 0.7;
+        }
+    }
+}

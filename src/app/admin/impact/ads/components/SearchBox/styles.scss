@@ -1,0 +1,21 @@
+.search-box-main{
+    display: flex;
+    justify-content: end;
+    .input-box{
+        position: relative;
+        input{
+            padding: 5px;
+            &:focus-visible{
+                outline: none;
+            }
+        }
+        button{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    }
+}
