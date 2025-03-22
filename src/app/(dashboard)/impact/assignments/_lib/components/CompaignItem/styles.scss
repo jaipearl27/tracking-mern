@@ -1,0 +1,48 @@
+.compaign-item-wrapper {
+  padding: 20px;
+  border-radius: 4px;
+  border: 1px solid lightgrey;
+  // display: flex;
+  // flex-direction: column;
+  gap: 12px;
+  // max-width: 33%;
+  // width: 100%;
+
+  .header {
+    display: flex;
+    gap: 10px;
+  }
+
+  .info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    // margin-top: 10px;
+
+    .description {
+      font-size: 12px;
+      max-width: 400px;
+    }
+
+    .info-tag {
+      padding: 4px 12px;
+      font-size: 12px;
+      border-radius: 12px;
+      border: 1px solid lightgrey;
+      width: fit-content;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  // flex-wrap: wrap;
+}
+
+.compaign-logo-image {
+  border-radius: 10px;
+}
+
+

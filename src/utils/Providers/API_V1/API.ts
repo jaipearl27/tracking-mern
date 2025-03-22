@@ -1,10 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
 
-
-
-
-
 const config = {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
 };
@@ -95,6 +91,20 @@ export const getallUser = async (): Promise<any> => {
                 throw error
         }
 };
+
+
+
+export const getUserData = async (): Promise<any> => {
+        try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/info`, config)
+                return response.data
+        }
+        catch (error) {
+                console.error("Error fetching user data:", error);
+                throw error
+        }
+};
+
 
 export const getTrackingLinks = async (): Promise<any> => {
         try {
