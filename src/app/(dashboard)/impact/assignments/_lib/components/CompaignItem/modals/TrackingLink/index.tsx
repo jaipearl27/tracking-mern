@@ -13,11 +13,11 @@ type Props = {
   data: string[];
   programId: any;
   mediaProperties: any;
-  users: any;
+  // users: any;
 };
 
 
-const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) => {
+const TrackingLinkModal = ({ data, programId, mediaProperties }: Props) => {
 
 
   const [response, setResponse] = useState<any>(null)
@@ -28,7 +28,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
   const [trackingLinkData, setTrackingLinkData] = useState<any>(null)
   const [assignments, setAssignments] = useState<any>(null)
-  const [showAssignTo, setShowAssignTo] = useState<boolean>(false)
+  // const [showAssignTo, setShowAssignTo] = useState<boolean>(false)
 
   const { handleChange, isOpen } = useToggleBoolean();
 
@@ -90,7 +90,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
 
     await fetchAssignmentsAsPerTrackingLink()
-    setShowAssignTo(false)
+    // setShowAssignTo(false)
     setSelectedUser(null)
   }
 
@@ -141,12 +141,12 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
             <li key={idx} className="no-decoration">
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px" }}>
                 {item?.TrackingLink?.length > 0 && <Link href={item?.TrackingLink} target="_blank">{item?.TrackingLink}</Link>}
-                <button onClick={() => {
+                {/* <button onClick={() => {
                   setShowAssignTo(true)
                 }
                 } className="btn-primary">
                   {assignments && assignments?.length > 0 ? "Reassign" : "Create Assignment"}
-                </button>
+                </button> */}
               </div>
             </li>
           )) : (
@@ -163,23 +163,23 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
           {assignments && assignments?.length > 0 && (
             <>
-              <li className="no-decoration" style={{ marginTop: "10px", fontWeight: "bold" }}>
+              {/* <li className="no-decoration" style={{ marginTop: "10px", fontWeight: "bold" }}>
                 Assignments:
-              </li>
+              </li> */}
               <table style={{ width: "100%", textAlign: "left" }}>
                 <thead>
                   <tr>
-                    <th>Tracking Link</th>
+                    {/* <th>Tracking Link</th> */}
                     <th>Assigned To</th>
-                    <th>Clicks</th>
+                    <th>Total Clicks</th>
                   </tr>
                 </thead>
                 <tbody>
                   {assignments?.map((item: any) => (
                     <tr >
-                      <td style={{ paddingTop: "5px" }}><Link href={item?.trackingLinkId?.TrackingLink} target="_blank">{item?.trackingLinkId?.TrackingLink}</Link></td>
+                      {/* <td style={{ paddingTop: "5px" }}><Link href={item?.trackingLinkId?.TrackingLink} target="_blank">{item?.trackingLinkId?.TrackingLink}</Link></td> */}
                       <td style={{ paddingTop: "5px" }}>{item?.userId?.email}</td>
-                      <td style={{ paddingTop: "5px", textAlign: "center" }}>{item?.totalClicks}</td>
+                      <td style={{ paddingTop: "5px"}}>{item?.totalClicks}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -187,39 +187,6 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
             </>
           )}
 
-
-
-          {showAssignTo && (
-            <>
-              <li className="no-decoration" style={{ marginTop: "5px" }}>
-                Assign to:
-              </li>
-
-              <li className="no-decoration" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <select
-                  onChange={(e) => {
-                    const selectedId = e.target.value;
-                    // console.log("Selected User ID:", selectedId);
-                    setSelectedUser(selectedId);
-                  }}
-                  
-                >
-                  <option value="" disabled selected>
-                    Select a User
-                  </option>
-                  {users?.map((i: any, index: number) => (
-                    <option key={index} value={i?._id}>
-                      {i?.email}
-                    </option>
-                  ))}
-                </select>
-
-                <button className="btn-primary" onClick={() => assignTrackingLink()}>{assignments && assignments?.length > 0 ? "Reassign" : "Assign"}</button>
-              </li>
-
-        
-            </>
-          )}
 
           {/* 
           {response && (

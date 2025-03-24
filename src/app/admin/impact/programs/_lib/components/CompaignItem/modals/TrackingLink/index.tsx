@@ -5,7 +5,7 @@ import Anchor from "@/components/common/Anchor";
 import { useToggleBoolean } from "@/hooks/useToggleBoolean";
 import Modal from "@/components/common/Modal";
 import { IMPACT_ACTION_CREATE_CLICK_POST, IMPACT_ACTION_LIST_MEDIA_PROPERTIES } from "@/utils/Providers/Impact/API";
-import { createAssignment, createTrackingLink, getAssignmentsByTrackingLinkID, getTrackingLinkByProgramId } from "@/utils/Providers/API_V1/API";
+import { createAssignment, createTrackingLink, getAssignmentsByTrackingLinkID, getTotalClicksAsPerProgramId, getTrackingLinkByProgramId } from "@/utils/Providers/API_V1/API";
 import useSWR from "swr";
 import Link from "next/link";
 
@@ -21,6 +21,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
 
   const [response, setResponse] = useState<any>(null)
+  const [totalClicks, setTotalClicks] = useState<any>(0)
   const [selectedMediaProperty, setSelectedMediaProperty] = useState<any>(null)
   const [selectedUser, setSelectedUser] = useState<any>(null)
 
@@ -72,6 +73,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
   useEffect(() => {
     if (trackingLinkData && trackingLinkData?.length > 0) {
+
       fetchAssignmentsAsPerTrackingLink()
     }
   }, [trackingLinkData])
@@ -83,9 +85,9 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
 
   const assignTrackingLink = async () => {
-    if(!selectedUser) return alert("Please select a user")
+    if (!selectedUser) return alert("Please select a user")
     const result: any = await createAssignment({ trackingLinkId: trackingLinkData[0]?._id, userId: selectedUser })
-
+    console.log(result)
     alert(result?.response?.data?.message)
 
 
@@ -94,6 +96,20 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
     setSelectedUser(null)
   }
 
+  useEffect(() => {
+
+    const fetchTotalClicks = async (ProgramId: string) => {
+      const result: any = await getTotalClicksAsPerProgramId(ProgramId)
+
+      setTotalClicks(result?.data?.totalClicks || 0)
+    }
+
+
+    if (programId) {
+      fetchTotalClicks(programId)
+    }
+  })
+    , [programId]
   return (
     <>
       <Modal
@@ -132,7 +148,9 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                   No Tracking Link Found {" "} <button onClick={() => generateTrackingLink()}>Click here to generate one</button>
                 </div>
               )}
-
+              <div>
+                {`Total Clicks: ${totalClicks}`}
+              </div>
               <button onClick={() => generateTrackingLink()}>Click here to generate & save to your DB</button>
             </li>
           ))}
@@ -141,6 +159,9 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
             <li key={idx} className="no-decoration">
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px" }}>
                 {item?.TrackingLink?.length > 0 && <Link href={item?.TrackingLink} target="_blank">{item?.TrackingLink}</Link>}
+                <div>
+                  {`Total Clicks: ${totalClicks}`}
+                </div>
                 <button onClick={() => {
                   setShowAssignTo(true)
                 }
@@ -202,7 +223,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                     // console.log("Selected User ID:", selectedId);
                     setSelectedUser(selectedId);
                   }}
-                  
+
                 >
                   <option value="" disabled selected>
                     Select a User
@@ -217,7 +238,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                 <button className="btn-primary" onClick={() => assignTrackingLink()}>{assignments && assignments?.length > 0 ? "Reassign" : "Assign"}</button>
               </li>
 
-        
+
             </>
           )}
 

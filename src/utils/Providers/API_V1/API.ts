@@ -176,12 +176,36 @@ export const getAssignmentsByTrackingLinkID = async (trackingLinkId: string): Pr
         }
 }
 
+
+export const getAssignmentsByUserID = async (): Promise<any> => {
+        try {
+                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user`, config)
+                return result
+        } catch (error) {
+                console.error("Error fetching assignments by User ID:", error);
+                return error;
+        }
+}
+
+
 export const getAssignmentById = async (id: string): Promise<any> => {
         try {
                 const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/${id}`)
                 return result
         } catch (error) {
                 console.error("Error fetching assignment by ID:", error);
+                return error;
+        }
+}
+
+
+
+export const getTotalClicksAsPerProgramId = async (ProgramId: string): Promise<any> => {
+        try {
+                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/clicks/total/${ProgramId}`)
+                return result
+        } catch (error) {
+                console.error("Error fetching total clicks", error)
                 return error;
         }
 }

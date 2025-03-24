@@ -8,10 +8,7 @@ import CompaignItem from "../../../components/CompaignItem";
 // Styles
 import "./styles.scss";
 
-const CompaignListing = ({ data, mediaProperties, users }: { data: TCompaignListing["Campaigns"], mediaProperties: any, users: any }) => {
-
-
-
+const CompaignListing = ({ data, mediaProperties }: { data: TCompaignListing["Campaigns"], mediaProperties: any }) => {
 
 
   return (
@@ -37,7 +34,6 @@ const CompaignListing = ({ data, mediaProperties, users }: { data: TCompaignList
             Uri={item.Uri}
             key={item.CampaignId}
             mediaProperties={mediaProperties}
-            users={users}
           />
         );
       })}

@@ -15,17 +15,18 @@ import MaxWidth from "@/components/common/MaxWidth";
 import Loader from "@/components/common/Loader";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getallUser } from "@/utils/Providers/API_V1/API";
+import { getallUser, getAssignmentsByUserID } from "@/utils/Providers/API_V1/API";
 
 type Props = {};
 
 const CompaignContainer = (props: Props) => {
   const searchParams = useSearchParams();
-  const targetedParam = searchParams?.get("InsertionOrderStatus");
+  // const targetedParam = searchParams?.get("InsertionOrderStatus");
+  const targetedParam = "ACTIVE"
   const Page = searchParams?.get("Page");
 
-  const [users, setUsers] = useState<any>(null)
-
+  const [assignments, setAssignments] = useState<any>(null)
+  const [filteredCampaignsData, setFilteredCampaignsData] = useState<any>([])
 
   const key = "/programs" + Page + targetedParam;
 
@@ -37,12 +38,12 @@ const CompaignContainer = (props: Props) => {
     // });
 
     const res = await IMPACT_ACTION_CAMPAIGNS_GET({
-      ...(targetedParam ? { InsertionOrderStatus: targetedParam } : null),
+      ...(targetedParam ? { InsertionOrderStatus: targetedParam } : {InsertionOrderStatus: "ACTIVE"}),
       Page: Page || "1",
       PageSize: "6",
     });
 
-    console.log('programs data', res);
+    // console.log('programs data', res);
     return res;
   });
 
@@ -76,15 +77,32 @@ const CompaignContainer = (props: Props) => {
     }
   );
 
-  const { data: usersData, isLoading: usersLoading } = useSWR(
-    "/get users",
-    async () => await getallUser(),
+  // const { data: usersData, isLoading: usersLoading } = useSWR(
+  //   "/get users",
+  //   async () => await getallUser(),
+  //   {
+  //     onSuccess(usersData) {
+  //       if (!usersData) {
+  //         toast.error("No Users Found");
+  //       } else {
+  //         setUsers(usersData.users);
+  //       }
+  //     }
+  //   }
+  // );
+
+
+  
+  const { data: assignmentsData, isLoading: assignmentsLoading } = useSWR(
+    "/get assignments",
+    async () => await getAssignmentsByUserID(),
     {
-      onSuccess(usersData) {
-        if (!usersData) {
+      onSuccess(assignmentsData) {
+        if (!assignmentsData) {
           toast.error("No Users Found");
         } else {
-          setUsers(usersData.users);
+          // console.log('assignments data', assignmentsData?.data)
+          setAssignments(assignmentsData?.data);
         }
       }
     }
@@ -92,17 +110,33 @@ const CompaignContainer = (props: Props) => {
 
 
 
-
   // useEffect(() => {
   //   console.log('mediaProperties', mediaProperties)
   // }, [mediaProperties])
 
+useEffect(() => {
+ if(data?.Campaigns && assignments){
+
+  console.log(data?.Campaigns, assignments)
+
+
+  const campaigns: any = data?.Campaigns 
+  const filteredCampaigns: any = campaigns.filter((campaign: any) =>
+    assignments.some((assignment: any) => campaign.CampaignId === assignment?.trackingLinkId?.ProgramId)
+  );
+  setFilteredCampaignsData(filteredCampaigns)
+ }
+
+
+}, [assignments, data])
+
+  
 
 
   return (
     <MaxWidth width={2000}>
-      <Heading mb={30} text="Programs" />
-      <CompaignListingFilter disabled={isLoading} />
+      <Heading mb={30} text="Assigned Programs" />
+      {/* <CompaignListingFilter disabled={isLoading} /> */}
 
       <Divider mb={15} />
       {isLoading && !data ? (
@@ -112,7 +146,7 @@ const CompaignContainer = (props: Props) => {
       ) : (
         <>
           {/* <h6>datatttt</h6> */}
-          <CompaignListing data={(data?.Campaigns! || []) as any} mediaProperties={mediaProperties} users={users} />
+          <CompaignListing data={(filteredCampaignsData) as any} mediaProperties={mediaProperties} />
           <CampaignPagination />
         </>
       )}
