@@ -5,7 +5,9 @@ import React from "react";
 import "./styles.scss";
 import { revalidatePath } from "next/cache";
 
-type Props = {};
+type Props = {
+  maxPages: number
+};
 
 const CampaignPagination = (props: Props) => {
   const router = useRouter();
@@ -33,7 +35,7 @@ const CampaignPagination = (props: Props) => {
 
     // if (targetParam || Number(searchParams?.get("Page")) !== 1) {
     //   current?.set("Page", `${Number(targetParam) - 1}`);
-    // }
+    // }                                                            
 
     const search = current.toString();
     const query = search ? `?${search}` : "";
