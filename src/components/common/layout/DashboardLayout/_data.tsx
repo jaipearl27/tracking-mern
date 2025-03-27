@@ -138,5 +138,17 @@ export const adminNavLinksData = [
       { text: "Withdrawal Settings", to: "/admin/impact/withdrawal-settings" }
     ]
   },
-  
+  {
+    text: "Partnerize",
+    icon: <FaBullhorn size={20} />,
+    subLinks: [
+      { text: "Campaign", to: "/admin/partnerize/campaign" },
+      {text: "Conversions", to: "/admin/partnerize/conversions"},
+      {text: "Conversions-Summary", to: "/admin/partnerize/conversions-summary"},
+      {text: "Creatives", to: "/admin/partnerize/creatives"},
+      {text: "Performance", to: "/admin/partnerize/performance"},
+      {text: "Transaction-Queries", to: "/admin/partnerize/transaction-queries"},
+      {text: "Transaction-Reports", to: "/admin/partnerize/transaction-reports"},
+    ]
+  },
 ];
