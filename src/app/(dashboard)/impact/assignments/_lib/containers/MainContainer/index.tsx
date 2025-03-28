@@ -1,12 +1,12 @@
 "use client";
-import Container from "@/components/common/Container";
+// import Container from "@/components/common/Container";
 import Divider from "@/components/common/Divider";
 import Heading from "@/components/common/Heading";
-import Spinner from "@/components/common/Spinner";
+// import Spinner from "@/components/common/Spinner";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import CompaignListing from "./CompaignListing";
-import CompaignListingFilter from "./Filter";
+// import CompaignListingFilter from "./Filter";
 import CampaignPagination from "./Pagination";
 import "./styles.scss";
 // import { fetchCampaigns } from "@/app/(dashboard)/programs/page";
@@ -15,7 +15,7 @@ import MaxWidth from "@/components/common/MaxWidth";
 import Loader from "@/components/common/Loader";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getallUser, getAssignmentsByUserID } from "@/utils/Providers/API_V1/API";
+import { getUserAssignments } from "@/utils/Providers/API_V1/API";
 
 type Props = {};
 
@@ -62,20 +62,20 @@ const CompaignContainer = (props: Props) => {
 
   const [mediaProperties, setMediaProperties] = useState<any>(null)
 
-  const { data: mediaPropertiesData, isLoading: mediaPropertiesLoading } = useSWR(
-    "/get media properties",
-    async () => await IMPACT_ACTION_LIST_MEDIA_PROPERTIES(),
-    {
-      onSuccess(mediaPropertiesData) {
-        // console.log("Media Properties Data:", mediaPropertiesData); // Debugging
-        if (!mediaPropertiesData) {
-          toast.error("No Media Properties Found");
-        } else {
-          setMediaProperties(mediaPropertiesData);
-        }
-      }
-    }
-  );
+  // const { data: mediaPropertiesData, isLoading: mediaPropertiesLoading } = useSWR(
+  //   "/get media properties",
+  //   async () => await IMPACT_ACTION_LIST_MEDIA_PROPERTIES(),
+  //   {
+  //     onSuccess(mediaPropertiesData) {
+  //       // console.log("Media Properties Data:", mediaPropertiesData); // Debugging
+  //       if (!mediaPropertiesData) {
+  //         toast.error("No Media Properties Found");
+  //       } else {
+  //         setMediaProperties(mediaPropertiesData);
+  //       }
+  //     }
+  //   }
+  // );
 
   // const { data: usersData, isLoading: usersLoading } = useSWR(
   //   "/get users",
@@ -95,7 +95,7 @@ const CompaignContainer = (props: Props) => {
   
   const { data: assignmentsData, isLoading: assignmentsLoading } = useSWR(
     "/get assignments",
-    async () => await getAssignmentsByUserID(),
+    async () => await getUserAssignments(),
     {
       onSuccess(assignmentsData) {
         if (!assignmentsData) {

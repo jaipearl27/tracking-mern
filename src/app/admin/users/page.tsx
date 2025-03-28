@@ -39,6 +39,7 @@ const Users = () => {
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>Role</th>
                             <th>Actions</th>
                         </tr>
@@ -46,8 +47,9 @@ const Users = () => {
                     <tbody>
                         {users && users.map((user: any, index: number) => (
                             <tr key={user._id} className={index % 2 === 0 ? "even" : "odd"}>
-                                <td>{user.name}</td>
+                                <td>{user?.name || "-"}</td>
                                 <td>{user.email}</td>
+                                <td>{user?.phone || "-"}</td>
                                 <td>
                                     <span className={`role-badge ${user.role.toLowerCase()}`}>
                                         {user.role}

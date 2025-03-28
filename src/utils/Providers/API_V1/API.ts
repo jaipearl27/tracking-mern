@@ -106,6 +106,20 @@ export const getUserData = async (): Promise<any> => {
 };
 
 
+
+export const getUser = async (id: string): Promise<any> => {
+        try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${id}`, config)
+                return response.data
+        }
+        catch (error) {
+                console.error("Error fetching user data:", error);
+                throw error
+        }
+};
+
+
+
 export const getTrackingLinks = async (): Promise<any> => {
         try {
                 const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`)
@@ -176,8 +190,7 @@ export const getAssignmentsByTrackingLinkID = async (trackingLinkId: string): Pr
         }
 }
 
-
-export const getAssignmentsByUserID = async (): Promise<any> => {
+export const getUserAssignments = async (): Promise<any> => {
         try {
                 const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user`, config)
                 return result
@@ -186,6 +199,18 @@ export const getAssignmentsByUserID = async (): Promise<any> => {
                 return error;
         }
 }
+
+
+export const getAssignmentsByUserID = async (id: string): Promise<any> => {
+        try {
+                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user/${id}`, config)
+                return result
+        } catch (error) {
+                console.error("Error fetching assignments by User ID:", error);
+                return error;
+        }
+}
+
 
 
 export const getAssignmentById = async (id: string): Promise<any> => {

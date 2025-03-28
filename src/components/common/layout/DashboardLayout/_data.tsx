@@ -138,9 +138,6 @@ export const adminNavLinksData = [
       { text: "Withdrawal Settings", to: "/admin/impact/withdrawal-settings" }
     ]
   },
-<<<<<<< HEAD
-
-=======
   {
     text: "Partnerize",
     icon: <FaBullhorn size={20} />,
@@ -154,5 +151,4 @@ export const adminNavLinksData = [
       {text: "Transaction-Reports", to: "/admin/partnerize/transaction-reports"},
     ]
   },
->>>>>>> 3ac1c1ccc945670f4c5bc1755dab84a9d258760b
 ];
