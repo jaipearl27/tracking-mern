@@ -1,0 +1,53 @@
+.conversions-summary {
+    padding: 16px;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+  
+  
+    .category-section {
+      margin-bottom: 24px;
+  
+      h3 {
+        text-transform: capitalize;
+        margin-bottom: 16px;
+        font-size: 1.2rem;
+        color: #333;
+      }
+  
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 16px;
+      }
+  
+      .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: #fff;
+  
+        h4 {
+          margin: 0 0 8px;
+          font-size: 1.1rem;
+          color: #555;
+        }
+  
+        p {
+          font-size: 1.2rem;
+          margin: 0;
+          color: #000;
+        }
+  
+        &:hover {
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          transition: box-shadow 0.3s ease;
+        }
+      }
+    }
+  }
+  
