@@ -212,3 +212,13 @@ export const getTotalClicksAsPerProgramId = async (ProgramId: string): Promise<a
 
 
 
+export const syncClicks = async (startDate: string, endDate: string):Promise<any> => {
+        try {
+                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/clicks?startDate=${startDate}=&endDate=${endDate}`)
+                return result
+        } catch (error) {
+                console.error("Error fetching total clicks", error)
+                return error;
+        }
+}
+

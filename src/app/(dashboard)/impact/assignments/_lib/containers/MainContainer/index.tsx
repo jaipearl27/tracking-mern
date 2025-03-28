@@ -130,7 +130,6 @@ useEffect(() => {
 
 }, [assignments, data])
 
-  
 
 
   return (

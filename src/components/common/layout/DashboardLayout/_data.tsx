@@ -138,5 +138,5 @@ export const adminNavLinksData = [
       { text: "Withdrawal Settings", to: "/admin/impact/withdrawal-settings" }
     ]
   },
-  
+
 ];
