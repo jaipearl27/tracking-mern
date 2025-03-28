@@ -10,6 +10,8 @@ import useSWR from "swr"
 import { useEffect } from "react";
 import Link from "next/link";
 import "../styles.scss"
+import "@/app/styles.scss"
+import { formatDateTime } from "@/utils/DateUtils";
 
 
 export default function page({ params }) {
@@ -47,6 +49,7 @@ export default function page({ params }) {
 
     useEffect(() => {
         console.log(assignmentsData, 'assignments')
+        console.log(formatDateTime("2025-03-21T09:56:26.417Z"));
     }, [assignmentsData])
 
     return (
@@ -116,7 +119,7 @@ export default function page({ params }) {
                         <table className="tracking-table" style={{ width: "100%", textAlign: "left" }}>
                             <thead>
                                 <tr>
-                                    <th>Tracking Link</th>
+                                    <th style={{maxWidth: '300px', textOverflow: "ellipsis"}}>Tracking Link</th>
                                     <th>Assigned To</th>
                                     <th>Status</th>
                                     <th>Assigned on</th>
@@ -126,13 +129,13 @@ export default function page({ params }) {
                             </thead>
                             <tbody>
                                 {assignmentsData?.data?.map((item) => (
-                                    <tr >
-                                        <td style={{ paddingTop: "5px" }}><Link href={item?.trackingLinkId?.TrackingLink} target="_blank">{item?.trackingLinkId?.TrackingLink}</Link></td>
-                                        <td style={{ paddingTop: "5px" }}>{item?.userId?.email}</td>
-                                        <td style={{ paddingTop: "5px" }}>{item?.status.toUpperCase()}</td>
-                                        <td style={{ paddingTop: "5px" }}>{new Date(item?.createdAt).toDateString()}</td>
-                                        <td style={{ paddingTop: "5px" }}>{item?.inactiveDate ? new Date(item?.inactiveDate).toISOString() : "-"}</td>
-                                        <td style={{ paddingTop: "5px", textAlign: "center" }}>{item?.totalClicks}</td>
+                                    <tr key={item?._id} >
+                                        <td style={{maxWidth: '300px', textOverflow: "ellipsis"}}><Link style={{maxWidth: '300px', textOverflow: "ellipsis"}} href={item?.trackingLinkId?.TrackingLink} target="_blank">{item?.trackingLinkId?.TrackingLink}</Link></td>
+                                        <td >{item?.userId?.email}</td>
+                                        <td >{item?.status.toUpperCase()}</td>
+                                        <td >{formatDateTime(item?.createdAt)}</td>
+                                        <td >{item?.inactiveDate ? formatDateTime(item?.inactiveDate) : "-"}</td>
+                                        <td >{item?.totalClicks}</td>
                                     </tr>
                                 ))}
                             </tbody>
