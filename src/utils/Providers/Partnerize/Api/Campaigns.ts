@@ -14,7 +14,6 @@ export const getCampaigns = async ({
             partnerize_v1: { listCampaigns },
         } = await getPaths();
 
-
         const { data } = await instance.partnerize_v1({
             method: "GET",
             url: `${listCampaigns}/${campaignStatus}`,
