@@ -5,9 +5,11 @@ import Anchor from "@/components/common/Anchor";
 import { useToggleBoolean } from "@/hooks/useToggleBoolean";
 import Modal from "@/components/common/Modal";
 import { IMPACT_ACTION_CREATE_CLICK_POST, IMPACT_ACTION_LIST_MEDIA_PROPERTIES } from "@/utils/Providers/Impact/API";
-import { createAssignment, createTrackingLink, getAssignmentsByTrackingLinkID, getTotalClicksAsPerProgramId, getTrackingLinkByProgramId } from "@/utils/Providers/API_V1/API";
+import { createImpactAssignment, createTrackingLink, getAssignmentsByTrackingLinkID, getTotalClicksAsPerProgramId, getTrackingLinkByProgramId } from "@/utils/Providers/API_V1/API";
 import useSWR from "swr";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { GrReturn } from "react-icons/gr";
 
 type Props = {
   data: string[];
@@ -84,17 +86,17 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
 
 
-  const assignTrackingLink = async () => {
-    if (!selectedUser) return alert("Please select a user")
-    const result: any = await createAssignment({ trackingLinkId: trackingLinkData[0]?._id, userId: selectedUser })
-    console.log(result)
-    alert(result?.response?.data?.message)
+  // const assignTrackingLink = async () => {
+  //   if (!selectedUser) return alert("Please select a user")
+  //   const result: any = await createAssignment({ trackingLinkId: trackingLinkData[0]?._id, userId: selectedUser })
+  //   console.log(result)
+  //   alert(result?.response?.data?.message)
 
 
-    await fetchAssignmentsAsPerTrackingLink()
-    setShowAssignTo(false)
-    setSelectedUser(null)
-  }
+  //   await fetchAssignmentsAsPerTrackingLink()
+  //   setShowAssignTo(false)
+  //   setSelectedUser(null)
+  // }
 
   useEffect(() => {
 
@@ -110,6 +112,30 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
     }
   })
     , [programId]
+
+
+
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<any>();
+
+  const onSubmit = async (data: any) => {
+    console.log(data, "data");
+    // return
+    if (!data.userId) return alert("Please select a user");
+    const result: any = await createImpactAssignment({
+      trackingLinkId: trackingLinkData[0]?._id,
+      userId: data.userId,
+      commissionPercentage: data.commissionPercentage
+    });
+    console.log(result);
+    alert(result?.response?.data?.message);
+
+    await fetchAssignmentsAsPerTrackingLink();
+    setShowAssignTo(false);
+    setSelectedUser(null);
+    reset();
+  };
+
+
   return (
     <>
       <Modal
@@ -210,37 +236,59 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
 
 
-          {showAssignTo && (
-            <>
-              <li className="no-decoration" style={{ marginTop: "5px" }}>
-                Assign to:
-              </li>
+          {
+            showAssignTo && (
+              <>
+                <li className="no-decoration" style={{ marginTop: "5px" }}>
+                  Assign to:
+                </li>
 
-              <li className="no-decoration" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <select
-                  onChange={(e) => {
-                    const selectedId = e.target.value;
-                    // console.log("Selected User ID:", selectedId);
-                    setSelectedUser(selectedId);
-                  }}
+                <li className="no-decoration">
+                  <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <select
+                        {...register("userId", { required: "Please select a user" })}
+                        defaultValue=""
+                      >
+                        <option value="" disabled>
+                          Select a User
+                        </option>
+                        {users?.map((i: any, index: number) => (
+                          <option key={index} value={i?._id}>
+                            {i?.email}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.userId && <span style={{ color: 'red', fontSize: '0.8rem' }}>{errors?.userId?.message}</span>}
+                    </div>
 
-                >
-                  <option value="" disabled selected>
-                    Select a User
-                  </option>
-                  {users?.map((i: any, index: number) => (
-                    <option key={index} value={i?._id}>
-                      {i?.email}
-                    </option>
-                  ))}
-                </select>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <input
+                        type="number"
+                        placeholder="Commission Percentage"
+                        {...register("commissionPercentage", {
+                          required: "Commission percentage is required",
+                          min: { value: 0, message: "Cannot be negative" },
+                          max: { value: 100, message: "Cannot exceed 100%" }
+                        })}
+                        style={{ padding: "5px", width: "150px" }}
+                      />
+                      {errors.commissionPercentage &&
+                        <span style={{ color: 'red', fontSize: '0.8rem' }}>{errors?.commissionPercentage?.message}</span>
+                      }
+                    </div>
 
-                <button className="btn-primary" onClick={() => assignTrackingLink()}>{assignments && assignments?.length > 0 ? "Reassign" : "Assign"}</button>
-              </li>
-
-
-            </>
-          )}
+                    <button
+                      type="submit"
+                      className="btn-primary"
+                    >
+                      {assignments && assignments?.length > 0 ? "Reassign" : "Assign"}
+                    </button>
+                  </form>
+                </li>
+              </>
+            )
+          }
 
           {/* 
           {response && (
@@ -267,3 +315,6 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 };
 
 export default TrackingLinkModal;
+
+
+

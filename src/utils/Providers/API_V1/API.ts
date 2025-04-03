@@ -160,9 +160,11 @@ export const createTrackingLink = async (data: { TrackingLink: string, ProgramId
         }
 }
 
-export const createAssignment = async (data: { trackingLinkId: string, userId: string }): Promise<any> => {
+export const createImpactAssignment = async (data: { trackingLinkId: string, userId: string, commissionPercentage: number }): Promise<any> => {
         try {
-                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`, data)
+                const payload = {...data, platform: "impact"}
+                console.log(payload, "payload")
+                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`, payload)
                 return result
         } catch (error) {
                 console.error("Error creating assignment:", error);
