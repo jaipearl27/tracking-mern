@@ -37,6 +37,10 @@ const CompaignListing = ({ data, mediaProperties }: { data: TCompaignListing["Ca
           />
         );
       })}
+
+      {Array.isArray(data) && data?.length <= 0 && (
+      <div>No active assignments found.</div>
+      )}
     </div>
   );
 };

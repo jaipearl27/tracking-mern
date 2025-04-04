@@ -29,6 +29,7 @@ function CampaignsViewer() {
             const response = await getCampaigns({
                 campaignStatus: status as CampaignStatus,
             });
+            console.log(response, 'partnerize api')
             const fetchedCampaigns = response.campaigns as TCampaignPartnerize[];
             setCampaigns(fetchedCampaigns);
 
@@ -36,7 +37,7 @@ function CampaignsViewer() {
                 // Scroll to the searched campaign
                 setTimeout(() => {
                     scroller.scrollTo(searchedCampaign, {
-                        containerId:"main-container",
+                        containerId: "main-container",
                         duration: 800,
                         delay: 0,
                         smooth: "easeInOutQuart",
@@ -54,14 +55,15 @@ function CampaignsViewer() {
     const handleStatusChange = (
         selectedOption: SingleValue<{ value: string; label: string }>
     ) => {
+        alert(selectedOption.value)
         setCampaignsStatus(selectedOption);
         if (selectedOption) {
-            fetchCampaigns(selectedOption.value);
+            fetchCampaigns(CampaignStatus[`${selectedOption.value}`]);
         }
     };
 
     useEffect(() => {
-        fetchCampaigns(CampaignStatus.PENDING);
+        fetchCampaigns(CampaignStatus.APPROVED);
     }, []);
 
     if (isLoading) {
@@ -86,6 +88,7 @@ function CampaignsViewer() {
                             id={campaign.campaign.campaign_id} // Use campaign ID as the scroll target
                             className={styles.campaignCard}
                         >
+                            {campaign.campaign.campaign_id}
                             <div className={styles.campaignHeader}>
                                 <img
                                     src={campaign.campaign.campaign_logo}

@@ -106,6 +106,20 @@ export const getUserData = async (): Promise<any> => {
 };
 
 
+
+export const getUser = async (id: string): Promise<any> => {
+        try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${id}`, config)
+                return response.data
+        }
+        catch (error) {
+                console.error("Error fetching user data:", error);
+                throw error
+        }
+};
+
+
+
 export const getTrackingLinks = async (): Promise<any> => {
         try {
                 const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/trackingLinks`)
@@ -146,9 +160,11 @@ export const createTrackingLink = async (data: { TrackingLink: string, ProgramId
         }
 }
 
-export const createAssignment = async (data: { trackingLinkId: string, userId: string }): Promise<any> => {
+export const createImpactAssignment = async (data: { trackingLinkId: string, userId: string, commissionPercentage: number }): Promise<any> => {
         try {
-                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`, data)
+                const payload = {...data, platform: "impact"}
+                console.log(payload, "payload")
+                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments`, payload)
                 return result
         } catch (error) {
                 console.error("Error creating assignment:", error);
@@ -176,8 +192,7 @@ export const getAssignmentsByTrackingLinkID = async (trackingLinkId: string): Pr
         }
 }
 
-
-export const getAssignmentsByUserID = async (): Promise<any> => {
+export const getUserAssignments = async (): Promise<any> => {
         try {
                 const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user`, config)
                 return result
@@ -186,6 +201,18 @@ export const getAssignmentsByUserID = async (): Promise<any> => {
                 return error;
         }
 }
+
+
+export const getAssignmentsByUserID = async (id: string): Promise<any> => {
+        try {
+                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user/${id}`, config)
+                return result
+        } catch (error) {
+                console.error("Error fetching assignments by User ID:", error);
+                return error;
+        }
+}
+
 
 
 export const getAssignmentById = async (id: string): Promise<any> => {
@@ -211,4 +238,14 @@ export const getTotalClicksAsPerProgramId = async (ProgramId: string): Promise<a
 }
 
 
+
+export const syncClicks = async (startDate: string, endDate: string):Promise<any> => {
+        try {
+                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/clicks?startDate=${startDate}=&endDate=${endDate}`)
+                return result
+        } catch (error) {
+                console.error("Error fetching total clicks", error)
+                return error;
+        }
+}
 

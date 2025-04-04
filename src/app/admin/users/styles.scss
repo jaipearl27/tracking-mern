@@ -45,7 +45,8 @@ label {
     text-align: left;
 }
 
-input, select {
+input,
+select {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -56,6 +57,7 @@ input, select {
     background-color: #fff;
 
 }
+
 .submit-button {
     padding: 12px;
     background-color: #007bff;
@@ -72,6 +74,7 @@ input, select {
         background-color: #0056b3;
     }
 }
+
 .users-container {
     padding: 20px;
     background-color: #f8f9fa;
@@ -165,3 +168,5 @@ input, select {
         }
     }
 }
+
+

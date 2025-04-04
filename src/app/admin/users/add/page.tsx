@@ -13,7 +13,8 @@ const AddUser = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        password:"",
+        password: "",
+        phone: ""
     });
 
     const [loading, setLoading] = useState(userId ? true : false);
@@ -25,12 +26,13 @@ const AddUser = () => {
         const fetchUserData = async () => {
             try {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${userId}`);
-                
+
                 if (response.data?.user) {
                     setFormData({
                         name: response.data.user.name || "",
                         email: response.data.user.email || "",
-                        password:""
+                        password: "",
+                        phone: response.data.user.phone || ""
                     });
                 }
             } catch (error) {
@@ -105,12 +107,27 @@ const AddUser = () => {
                             required
                         />
                     </div>
+
+                    {/* Phone */}
+                    <div className="form-group">
+                        <label htmlFor="phone">Phone</label>
+                        <input
+                            type="text"
+                            id="phone"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder="Enter Phone Number"
+                        />
+                    </div>
+
+
                     {/* password */}
                     <div className="form-group">
                         <label htmlFor="password">{userId ? "New Password" : "Password"}</label>
                         <input type="password"
-                        id="password"
-                        name="password" value={formData.password} onChange={handleChange} placeholder="password" required={!userId} />
+                            id="password"
+                            name="password" value={formData.password} onChange={handleChange} placeholder="password" required={!userId} />
                     </div>
 
                     {/* Role Field */}
