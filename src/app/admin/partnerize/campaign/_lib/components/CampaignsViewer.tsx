@@ -55,10 +55,10 @@ function CampaignsViewer() {
     const handleStatusChange = (
         selectedOption: SingleValue<{ value: string; label: string }>
     ) => {
-        alert(selectedOption.value)
+        alert(selectedOption?.value)
         setCampaignsStatus(selectedOption);
         if (selectedOption) {
-            fetchCampaigns(CampaignStatus[`${selectedOption.value}`]);
+            fetchCampaigns(CampaignStatus[selectedOption?.value as keyof typeof CampaignStatus]);
         }
     };
 
