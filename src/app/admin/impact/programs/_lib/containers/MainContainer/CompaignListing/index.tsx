@@ -37,6 +37,7 @@ const CompaignListing = ({ data, mediaProperties, users }: { data: TCompaignList
             Uri={item.Uri}
             key={item.CampaignId}
             mediaProperties={mediaProperties}
+            users={users}
           />
         );
       })}

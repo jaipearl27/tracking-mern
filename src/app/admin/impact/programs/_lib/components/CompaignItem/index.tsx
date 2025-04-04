@@ -49,7 +49,7 @@ const CompaignItem = ({
   TrackingLink,
   Uri,
   mediaProperties,
-  users
+  users=[]
 }: Props) => {
   // const router = useRouter();
 
