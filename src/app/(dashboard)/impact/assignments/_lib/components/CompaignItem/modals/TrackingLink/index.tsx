@@ -4,8 +4,8 @@ import CompaignShortInfo from "../../ShortInfo";
 import Anchor from "@/components/common/Anchor";
 import { useToggleBoolean } from "@/hooks/useToggleBoolean";
 import Modal from "@/components/common/Modal";
-import { IMPACT_ACTION_CREATE_CLICK_POST, IMPACT_ACTION_LIST_MEDIA_PROPERTIES } from "@/utils/Providers/Impact/API";
-import { createImpactAssignment, createTrackingLink, getAssignmentsByTrackingLinkID, getTrackingLinkByProgramId } from "@/utils/Providers/API_V1/API";
+import { IMPACT_ACTION_CREATE_CLICK_POST } from "@/utils/Providers/Impact/API";
+import { createTrackingLink, getAssignmentsByTrackingLinkID, getTrackingLinkByProgramId } from "@/utils/Providers/API_V1/API";
 import useSWR from "swr";
 import Link from "next/link";
 
@@ -80,19 +80,6 @@ const TrackingLinkModal = ({ data, programId, mediaProperties }: Props) => {
     console.log(assignments, "assignments")
   }, [assignments])
 
-
-
-  const assignTrackingLink = async () => {
-    if(!selectedUser) return alert("Please select a user")
-    const result: any = await createImpactAssignment({ trackingLinkId: trackingLinkData[0]?._id, userId: selectedUser })
-
-    alert(result?.response?.data?.message)
-
-
-    await fetchAssignmentsAsPerTrackingLink()
-    // setShowAssignTo(false)
-    setSelectedUser(null)
-  }
 
   return (
     <>
