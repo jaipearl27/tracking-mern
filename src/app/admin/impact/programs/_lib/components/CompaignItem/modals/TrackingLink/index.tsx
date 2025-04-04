@@ -246,7 +246,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                           </option>
                         ))}
                       </select>
-                      {errors.userId && <span style={{ color: 'red', fontSize: '0.8rem' }}>{errors?.userId?.message}</span>}
+                      {errors.userId && <span style={{ color: 'red', fontSize: '0.8rem' }}>{errors?.userId?.message as string}</span>}
                     </div>
 
                     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -261,7 +261,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
                         style={{ padding: "5px", width: "150px" }}
                       />
                       {errors.commissionPercentage &&
-                        <span style={{ color: 'red', fontSize: '0.8rem' }}>{errors?.commissionPercentage?.message}</span>
+                        <span style={{ color: 'red', fontSize: '0.8rem' }}>{errors?.commissionPercentage?.message as string}</span>
                       }
                     </div>
 

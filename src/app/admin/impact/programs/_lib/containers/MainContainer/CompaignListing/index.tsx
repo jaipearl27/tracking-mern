@@ -10,10 +10,6 @@ import "./styles.scss";
 
 const CompaignListing = ({ data, mediaProperties, users }: { data: TCompaignListing["Campaigns"], mediaProperties: any, users: any }) => {
 
-
-
-
-
   return (
     <div className="campaign-list-wrapper">
       {(data || [])?.map((item) => {
