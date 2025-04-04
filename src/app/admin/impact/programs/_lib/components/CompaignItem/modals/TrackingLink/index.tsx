@@ -88,7 +88,7 @@ const TrackingLinkModal = ({ data, programId, mediaProperties, users }: Props) =
 
   // const assignTrackingLink = async () => {
   //   if (!selectedUser) return alert("Please select a user")
-  //   const result: any = await createAssignment({ trackingLinkId: trackingLinkData[0]?._id, userId: selectedUser })
+  //   const result: any = await createImpactAssignment({ trackingLinkId: trackingLinkData[0]?._id, userId: selectedUser })
   //   console.log(result)
   //   alert(result?.response?.data?.message)
 
