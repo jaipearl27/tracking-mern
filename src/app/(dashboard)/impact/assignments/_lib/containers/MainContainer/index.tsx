@@ -150,7 +150,7 @@ const CompaignContainer = (props: Props) => {
         <>
           {/* <h6>datatttt</h6> */}
           <CompaignListing data={(filteredCampaignsData) as any} mediaProperties={mediaProperties} />
-          <CampaignPagination />
+          <CampaignPagination/>
         </>
       )}
       <Divider mb={15} />
