@@ -5,11 +5,11 @@ import React from "react";
 import "./styles.scss";
 import { revalidatePath } from "next/cache";
 
-type Props = {
-  maxPages: number
-};
+// type Props = {
+//   maxPages: number
+// };
 
-const CampaignPagination = (props: Props) => {
+const CampaignPagination = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
