@@ -1,74 +1,47 @@
+"use client"
+
 import axios, { AxiosInstance } from "axios";
 
-
-const config = {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+// Utility function to safely get token
+const getAuthToken = () => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem("token");
+  }
+  return null;
 };
 
-
-// async function handleRequest<T>(
-//     request: Promise<AxiosResponse<T>>,
-//   ): Promise<T | null> {
-//     try {
-//       const response = await request;
-//       return response.data;
-//     } catch (error) {
-//       if (axios.isAxiosError(error) && error.response) {
-//         console.trace(error.response.data);
-//         console.log(error.response?.data);
-//         return null;
-//       }
-//       return null;
-//     }
-//     return null;
-//   }
-
-//   function createAxiosInstance({
-//     accept,
-//     contentLength,
-//     contentType,
-//     responseType = "json",
-//   }: {
-//     accept: string;
-//     contentLength?: string;
-//     contentType?: string;
-//     responseType?: ResponseType;
-//   }): AxiosInstance {
-//     return axios.create({
-//       baseURL: baseURL,
-//       headers: {
-//         Authorization: getAuthorizationHeader(auth_token, acc_sid),
-//         "Content-Type": contentType ? contentType : "application/json",
-//         Accept: accept,
-//         "Content-length": contentLength,
-//       },
-//       responseType,
-//     });
-//   }
-
+// Create getConfig() function instead of constant
+const getConfig = () => ({
+  headers: { 
+    Authorization: `Bearer ${getAuthToken()}` 
+  }
+});
 
 export const LOGIN = async (data: { email: string, password: string }): Promise<any> => {
-        try {
-                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`, data)
-                return result
-        } catch (error) {
-                console.error("Error during login:", error);
-                return error;
-        }
+  try {
+    const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signin`, data);
+    return result;
+  } catch (error) {
+    console.error("Error during login:", error);
+    return error;
+  }
 };
 
-
 export const LOGOUT = async (): Promise<any> => {
-        try {
-                console.log(config, 'config')
-                const result = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`, {}, config)
-                localStorage.clear()
-                console.log(result)
-                return result
-        } catch (error) {
-                console.error("Error during logout:", error);
-                return error;
-        }
+  try {
+    const result = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`, 
+      {}, 
+      getConfig()
+    );
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+    }
+    return result;
+  } catch (error) {
+    console.error("Error during logout:", error);
+    return error;
+  }
 };
 
 export const Signup = async (data: { name: string, email: string, password: string }): Promise<any> => {
@@ -96,7 +69,7 @@ export const getallUser = async (): Promise<any> => {
 
 export const getUserData = async (): Promise<any> => {
         try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/info`, config)
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/info`, getConfig())
                 return response.data
         }
         catch (error) {
@@ -105,17 +78,19 @@ export const getUserData = async (): Promise<any> => {
         }
 };
 
-
-
+// Update all other functions that use getConfig() to use getConfig() instead
+// For example:
 export const getUser = async (id: string): Promise<any> => {
-        try {
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${id}`, config)
-                return response.data
-        }
-        catch (error) {
-                console.error("Error fetching user data:", error);
-                throw error
-        }
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${id}`, 
+      getConfig()
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
 };
 
 
@@ -194,7 +169,7 @@ export const getAssignmentsByTrackingLinkID = async (trackingLinkId: string): Pr
 
 export const getUserAssignments = async (): Promise<any> => {
         try {
-                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user`, config)
+                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user`, getConfig())
                 return result
         } catch (error) {
                 console.error("Error fetching assignments by User ID:", error);
@@ -205,7 +180,7 @@ export const getUserAssignments = async (): Promise<any> => {
 
 export const getAssignmentsByUserID = async (id: string): Promise<any> => {
         try {
-                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user/${id}`, config)
+                const result = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/assignments/user/${id}`, getConfig())
                 return result
         } catch (error) {
                 console.error("Error fetching assignments by User ID:", error);

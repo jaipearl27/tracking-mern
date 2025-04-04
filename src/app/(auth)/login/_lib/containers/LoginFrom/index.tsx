@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import "./styles.scss";
 import Loader from "../../components/Loader";

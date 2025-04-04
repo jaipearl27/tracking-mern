@@ -1,3 +1,4 @@
+"use client"
 import Heading from "@/components/common/Heading";
 import MaxWidth from "@/components/common/MaxWidth";
 import React from "react";

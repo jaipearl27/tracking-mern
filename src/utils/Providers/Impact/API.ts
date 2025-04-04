@@ -26,7 +26,7 @@ import {
 import { TPromotionsDTO } from "@/types/Impact/promotion";
 import { app, db } from "@/config/firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { TCampaigns } from "@/app/(dashboard)/impact/programs/_lib/types";
+import { TCampaigns } from "@/app/(dashboard)/impact/assignments/_lib/types";
 type ParamsT = { [key: string]: string };
 
 const baseURL = "https://api.impact.com";

@@ -1,3 +1,5 @@
+"use client"
+
 import Header from "./_sections/Header";
 import NotificationCenter from "./_lib/containers/NotificationCenter";
 import ProgramsContainer from "./_lib/containers/ProgramsContainer";

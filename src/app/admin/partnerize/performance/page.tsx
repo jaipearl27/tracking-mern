@@ -1,3 +1,5 @@
+"use client"
+
 import Heading from "@/components/common/Heading";
 import InfoItem from "@/components/common/InfoItem";
 import MaxWidth from "@/components/common/MaxWidth";
